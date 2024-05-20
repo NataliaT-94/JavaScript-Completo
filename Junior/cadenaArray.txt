@@ -1,0 +1,94 @@
+Metodos Array:
+
+TRANSFORMADORES:
+
+pop(): Elimina el ultimo elemento de un array y lo devuelve(nos muestra cual elimino).
+	let nombres= ["pedro","maria","jorge"].
+	let resultado= nombres.pop();
+	
+	document.write(resultado); / nos devuelve jorge, porq es el nombre q se elimino.
+
+Shift(): Elimina el primer elemento de un array y lo devuelve(nos muestra cual elimino).
+	let nombres= ["pedro","maria","jorge"].
+	let resultado= nombres.Shift();
+	
+	document.write(resultado); / nos devuelve pedro, porq es el nombre q se elimino.
+
+
+push(): Agrega un elemento al array al final de la lista.
+	let nombres= ["pedro","maria","jorge"].
+	let resultado= nombres.push("juancito");
+	
+	document.write(resultado); / nos devuelve 4 porq fue agregado un elemento al array.
+
+
+reverse(): Invierte el orden de los elementos de  un array.
+	let numeros= [1,2,3,4,5].
+	let resultado= numeros.reverse();
+	
+	document.write(resultado); / nos devuelve 5,4,3,2,1 porq invierte el orden del array.
+
+
+unshift(): Agrega uno o mas elementos al inicio del array, y devuelve la nueva longitud del array.
+	let numeros= [3,4,5].
+	let resultado= numeros.unshift(0,1,2);
+	
+	document.write(resultado); / nos devuelve 0,1,2,3,4,5 .
+
+
+sort(): Ordena los elementos de unarreglo(array) localmente y devuelve el arreglo ordenado.
+	let numeros= [4,6,3,7,2].
+	let resultado= numeros.sort();
+	
+	document.write(resultado); / nos devuelve 2,3,2,6,7 de forma ordenada, si son palabras las ordena de forma alfabetica..
+
+splice(): Cambia el contenido de su array eliminando elementos existentes y/o agregando nuevos elementos.
+	let nombres= ["pedro","maria","jorge"].
+	let resultado= nombres.splice(0,1,"juancito"); / el primer parametro marca la posicion donde se va a comenzar, el segundo 								parametro indica la cantidad de elementos a eliminar y el tercer parametro indica 							lo que vamos agregar.
+	
+	document.write(resultado); / nos devuelve juancito, maria, jorge.
+
+
+
+
+Accesores:
+
+join(): Une todos los elementos de una matriz(u objetos similar) en una cadena y la devuelve.
+	let nombres= ["pedro","maria","jorge"].
+	let resultado= nombres.join(" - "); / lo transforma en cadena de texto y le poder hagregar el separador que quieras.
+	
+	document.write(resultado); / nos devuelve pedro - maria - jorge .
+
+
+slice(): Devuelveuna parte del array dentro de un nuevo array empezando por inicio hasta fin (fin no incluido).
+	let nombres= ["pedro","maria","jorge"].
+	let resultado= nombres.join(0,2); / desde el elemeto 0 hasta el 2.
+	
+	document.write(resultado); / nos devuelve pedro,maria.
+
+
+metodos ya vistos en cadenas: to-string(), indexOf(), lastIndexOf().
+
+
+De Repeticion:
+
+filter():Crear un nuevo array con todos los elementos que cumplan la condicion. Es como un bucle, en cada vuelta del bucle es iagual a la variable.
+	let nombres= ["pedro","maria","jorge"].
+	nombres.filter(nombre =>document.write(nombre + </br>)); /
+
+	//nombres.filter(
+		(numbre)=>{
+			document.write(nombre + </br>)
+	});
+
+	//nombres.filter(function(numbre){
+			document.write(nombre + </br>)
+	}); 
+
+nos devuelve: pedro
+	      maria
+	      jorge
+
+
+
+forEach():Ejecuta la funcion indicada una vez por cada elemento del array.

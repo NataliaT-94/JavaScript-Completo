@@ -1,0 +1,420 @@
+API: es una interfas de progrramacion de aplicaciones. Resive uno o mas datos, los procesa y los devuelve.
+
+EJ: document, window, promp, alert, etc....
+
+----------------
+
+Objeto Date
+	const fecha = new Date();
+	console.log(feche);
+
+-getDate(): nos devueve el dia del mes.
+	const fecha = new Date();
+	console.log(fecha.getDate());
+
+-getDay(): Nos devuelve el dia de la semana.
+	const fecha = new Date();
+	console.log(fecha.getDay());
+
+-getMonth():nos devuelve el mes.
+	const fecha = new Date();
+	console.log(fecha.getMonth());
+
+-getYear():Nos devuelve el año actual menos 1900.
+	const fecha = new Date();
+	console.log(fecha.getYear()+1900);
+
+-getHours():nos devuelve la hora.
+	const fecha = new Date();
+	console.log(fecha.getHours());
+
+-getMinutes():Nos devuelve los minutos
+	const fecha = new Date();
+	console.log(fecha.getMinutes());
+
+-getSeconds():Nos devuelve los segundos.
+	const fecha = new Date();
+	console.log(fecha.getSeconds());
+
+-Ejemplo de uso (Alarma).
+
+-------------------
+
+LocalStorage y SessionStorage
+
+-Diferencias: Son APIS que nos ayudan a almacenar informacion. Una cuando cargamos la pagina la informacion se pierde(SessionStorage), y la otra en cuanto eliminamos, la cerramos la pagina y la volvemos a abrir la  informacion sigue estando. La informacion se almacena en la sesion (localStorage).
+
+-setItem(): Definimos las propiedades.
+	localStorage.setItem("nombre","pedro");
+	console.log(localStorage).
+
+-getItem(): Obtenemos las propiedades.
+	let nombre = localStorage.getItem("nombre");
+	console.log(nombre);
+
+-removeItem(): Remueve el item
+	localStorage.setItem("nombre","pedro");
+	console.log(localStorage)
+	setTimeout(()=>{
+		let nombre = sessionStorage.removeItem("nombre");
+	},2000);
+
+-clear(): Remueve todos los items.
+	localStorage.setItem("nombre","pedro");
+	console.log(localStorage)
+	setTimeout(()=>{
+		let nombre = sessionStorage.clear();
+	},2000);
+
+-Ejemplo de uso (Idioma)
+
+--------------------
+
+Drag & Drop (Arrastrar y Soltar)
+
+-Eventos del objeto
+	-dragstart: Agarrar.
+	-drag: Arrastrar.
+	-dragend: Soltar.
+
+		const circulo = document.querySelector(".circulo");
+		circulo.addEventListener("dragstart",()=>console.log(1));
+		circulo.addEventListener("drag",()=>console.log(2));
+		circulo.addEventListener("dragend",()=>alert("soltado"));
+
+-Eventos de zona: son propiedades del objeto a soltar.
+	-dragenter: Verifica que lo que estamos arrastrando entre.
+	-dragover:Verifica que se mueva dentro de la zona. Tenemos que definir si podemos movernos en la zona.
+	-drop: Verifica cuando soltamos el objeto dentro de la zona.
+	-dragleave:Verifica cuando se va de la zona.
+
+		const rectangulo = document.querySelector(".rectangulo");
+		rectangulo.addEventListener("dragenter",()=>console.log(1));
+		rectangulo.addEventListener("dragover",(e)=>{
+			e.preventDefault(); // con este manejador permitimos que el elemento puede soltarse dentro de la zona.
+			console.log(2);
+		});
+		rectangulo.addEventListener("drop",()=>console.log(3));
+		rectangulo.addEventListener("dragleave",()=>console.log(4));
+
+
+-Propiedad dataTransfer: Es el objeto que transmite la informacion entre el objeto y la zona donde se va a soltar.
+		const circulo = document.querySelector(".circulo");
+		const rectangulo = document.querySelector(".rectangulo");
+
+		circulo.addEventListener("dragstart",(e)=>{
+			e.dataTransfer.setData("text-plain", e.target.className)
+		});
+
+		rectangulo.addEventListener("dragenter",()=>console.log(1));
+		rectangulo.addEventListener("dragover",(e)=>{
+			e.preventDefault(); // con este manejador permitimos que el elemento puede soltarse dentro de la zona.
+			console.log(2);
+		});
+		rectangulo.addEventListener("drop",(e)=>{
+			console.log(e.dataTransfer.getData("clase"))
+		});
+		rectangulo.addEventListener("dragleave",()=>console.log(4));	
+	-getData()
+	-setData()
+
+-Ejemplo de uso (Texturizador)
+
+-------------------
+
+Geolocalization
+
+-getCurrentPosition(): obtiene todos los datos de la posicion actual.
+	-parametros(position(pos), error, options).
+
+	-Propiedades de option (enableHightAccuracy, timeout, maximumAge)
+		-maximunAge: cuanto tiempo vas a querer guardar en catche las opciones?.
+		-timeout: Cuanto tiempo queres que tarde en devoolvernos la data?
+		-enableHightAccuracy: Es una propiedad que nos activa la alta presicion.(true o false).
+
+		const geolocation = navigator.geolocation;
+
+		const posicion = (pos)=>{
+			console.log(pos);
+		}
+		
+		const err = ()=> console.log(e);
+		
+		const options ={
+			maximumAge: 0,
+			timeout: 3000,
+			enableHightAccurady: true
+		}
+
+		geolocation.getCurrentPosition(posicion);	
+
+
+-watchPosition(): Antes cacmbios de la posicion la muestra.
+
+-clearWatch(): es para eliminar los cambios.
+
+----------------------
+
+Histotial
+
+-back(): Vuelve atras.
+	console.log(history.back());
+
+-forward(). Va hacia adelante.
+	console.log(history.forward());
+
+
+-tamano del historial
+	console.log(history.lenght);
+
+
+-go(): Va al sitio indicado con un numero relativo.
+	console.log(history.go(-1));// va a la pagina anterior
+	console.log(history.go());// recarga la pagina
+	console.log(history.go(1));// va a la pagina siguiente
+
+
+-pushState(): Modifica la URL y conserva la info.Crea una nueva entrada en el historial.
+	console.log(location.href);
+	history.pushState({nombre: "pedro"}," ","?hola");
+
+
+-propiedad state y evento popstate. Nos muestra el estado
+	history.state();  // muestra {nombre:"pedro"}
+///////////7
+
+	addEventListener("popstate",(e)=>{
+		e.state;
+	});
+
+-replaceState: Modifica la URL y no la conserva. 
+	console.log(history.replaceState());
+
+-----------------------
+
+FileReader: Es un archivo creado para actuar no cuando se lo llama sino cuando trabajamos con los eventos. Los usuarios nos mandan el archivo.
+	const archivo = document.getElementById('archivo');
+	archivo.addEventListener("change",(e)=>{
+		console.log(archivo.files[0])
+	});
+	const reader = new FileReader();
+
+-ReadAsText(): Sirve para leer el archivo.
+	+para leer un solo archivo.
+
+	const archivo = document.getElementById('archivo');
+	archivo.addEventListener("change",(e)=>{
+		console.log(archivo.files[0])
+	});
+
+	const leerArchivo = ar =>{
+		const reader = new FileReader();
+		reader.readAsText(ar);
+		reader. addEventListener("load",(e)=>{
+			console.log(JSON.parse(e.currentTarget.result));
+		});
+	};
+
+/////////////////
+	+para leer varios archivos
+
+	const archivo = document.getElementById('archivo');
+	archivo.addEventListener("change",(e)=>{
+		console.log(archivo.files);
+	});
+
+	const leerArchivo = ar =>{
+		for(let 1 = 0; i < ar.length; i++){
+			const reader = new FileReader();
+			reader.readAsText(ar[i]);
+			reader. addEventListener("load",(e)=>{
+			console.log(JSON.parse(e.currentTarget.result));
+			});
+		};
+	};
+	
+
+-ReadASDataURL():Es para leer otro tipo de archivo (imagen, data, etc..).
+
+	const archivo = document.getElementById('archivo');
+	archivo.addEventListener("change",(e)=>{
+		leerArchivo(archivo.files);
+	});
+
+	const leerArchivo = ar =>{
+		for(let i = 0; i < ar.length; i++){
+			const reader = new FileReader();
+			reader.readAsDataURL(ar[i]);
+			reader. addEventListener("load",(e)=>{
+			let newImg =`<img src='${e.currentTarget.result}'>` ;
+			document.querySelector(".resultado").innerHTML += newImg
+			});
+		};
+	};
+
+-Ejemplo de uso 1(Cargar galeria dinamicamente).
+-Ejemplo de uso 2(Combinar con Drag & Drop).
+-Ejemplo de uso 3(Barra de progreso con progress y loadend).
+
+-------------------
+
+IndexedDB: se visualiza en la consola en la parte de aplicaciones.
+
+-Caracteristicas
+	-Almacena informacion en el navegador de forma similar a localStorage.
+	-Es orienteda a objetos.
+	-Es asincrona, es decir todos los cambios que se hacen es en el tiempo real, no hace falta actualizar la pagina.
+	- Trabaja con eventos del DOM.
+
+-Procedimientos de creacion.
+	-objeto IndexedDB
+	-Metodo open().
+	-onupgradeneeded, onsucess, onerror.
+
+-Crear Almacen de objetos
+	-Almacen de objetos -Concepto: Es una arquitectura de almacenamiento de datos, es decir se almacenan los datos en forma de objetos.
+	-Metodo createObjectStore().
+	-autoIncrement vs KeyPath.
+
+-almacenar objetos.
+	-Metodo transaction().
+	-IDBTransaction.objectStore().
+	-IDBObjectStore.add().
+
+-Leer objetos del almacen
+	-IDBObjectStore.openCursor().// lee objetos.
+	-Metodo continue().
+
+-Modificar objetos
+	-IDBObjectStore.put().
+
+-Eliminar objetos
+	-IDBObjectStore.delete().
+
+		const IDBRequest = indexdDB.open("baseDatos",1);// le decimos que base de datos queremos abrir o crear y luego la version.
+		IDBRequest.addEventListenes("upgradeneeded",()=>{
+			const db = IDBRequest.result;
+			db.createObjectStore("nombre",{
+				autoIncrement: true;
+			});// primer parametro el nombre de la tabla segundo las keys.
+		});// si creamos una base de datos hay que ponerles las tablas.
+		IDBRequest.addEventListenes("success",()=>{
+			console.log("Todo salio correctamente");
+		});
+		IDBRequest.addEventListenes("error",()=>{
+			console.log("Ocurrio un error al abrir la base de datos");			});
+
+		const addObjetos = objeto =>{
+			const  IDBtransaction = db.transaction("nombres","readwrite");//abrimos  una mosficacion en la tabra nombres, es leer y escribir.
+			const objectStore = IDBtransaction.objctStore("nombre");// la modificacion se realiza en la tabla nombres.
+			objectStore.add(objeto);// agregamos el objeto.
+			IDBtransaction.addEventLiatener("complete", ()=>{
+				console.log("objeto agregado correctamente");
+			});
+		});
+
+		const leerObjetos = ()=>{
+			const db = IDBRequest.result;
+			const IDBtransaction = db.transaction("nombre","readonly");
+			const objectStore = IDBtransaction.objectStore("nombres");
+			const cursor = objectStore.openCursor();
+			cursor.addEventListener("succes", ()=>{
+				if(cursor.result){
+					console.log(cursor.result.value);
+					cursor.result.continue();
+				}else console.log("todos los datos fueron leidos");
+			});
+		
+		};
+
+		const modificarObjetos = (key,objeto)=>{
+			const db = IDBRequest.result;
+			const IDBtransaction = db.transaction("nombre","readwrite");
+			const objectStore = IDBtransaction.objectStore("nombres");
+			objectStore.put(objeto,key);
+			IDBtransaction.addEventListener("complete", ()=>{
+				console.log("objeto modificado correctamente");
+			});
+		
+		};
+
+ 		const eliminarObjetos = key =>{
+			const db = IDBRequest.result;
+			const IDBtransaction = db.transaction("nombre","readwrite");
+			const objectStore = IDBtransaction.objectStore("nombres");
+			objectStore.delete(key);
+			IDBtransaction.addEventListener("complete", ()=>{
+				console.log("objeto eliminado correctamente");
+			});
+		
+		};
+
+----------------------
+
+matchMedia
+-matchMedia():
+-propiedad match:
+-evento onchange:
+nos avisa cada vez q el change cambia
+	const mql = matchMedia("(max-width: 500px)");
+	mq.addEventListener("change"), ()=>{
+		console.log("resolucion  cambiada");
+	})
+
+- Cuando deberia usar esto?
+Nos permite utilizarlo con responsive design, pero se recomienda solo utilizarlo cuando no se pueda utilizar en css, cuando se quiera realizar distintas funcionalidades. Verifica que la media query es lo q yo necesito.
+	const mql = matchMedia("(max-width: 500px)");
+	console.log(mql.matches);
+
+-----------------------
+
+Intersection Observer
+-Que es y para que sirve?: Es para observar si esta en el navegador, si es visible o no es visible.
+-IntersectionObserver():
+	const cajas = document.querySelectorAll(".caja");
+	
+	const verifyVisibility = (entries) =>{
+		for(const entry of entries){
+			if(entry.isIntersecting)console.log("Se esta viendo la caja: ",entry.target.textContent);
+		}
+	}
+	
+	const observer = new Intersection-observer(verifyVisibility);
+
+	for (const caja of cajas){
+		observer.observe(caja);
+	}
+
+-callback y options
+-isIntersecting
+-Configurar options
+-Ejemplo de uso (Lazy load)
+
+--------------------
+visibilityChange: Cuando cambias de pestaña en el navegador
+	 
+	addEventlistener("visibilitychange",e=>{
+		if (e.target.visibilityState == "visible"){
+			document.write("saliste de la pagina y volviste");
+		} else{
+			alert("ah volviste, muy bien")
+		})
+
+-----------------------
+
+notifications: Es para mandar notificaciones desde nuestro ordenador
+
+-notofication.recuestPermission(): Pide permiso para poder acceder o enviar notificaciones
+-Notification.permission: Es el valor si esta o no permitido anviar notificaciones
+-notifications(msg,options)
+
+	if(!('Notification' in window)){
+		console.log("Las notificaciones no estan disponibles en tu navegador")
+	}
+	Notification.requestPermission(()=>{
+		if(Notification.Permission == "granted"){
+		}
+	})
+
+	new Notification("Suscribite a nosotros");
+ 

@@ -1,0 +1,265 @@
+Document- Metodos de seleccion de elementos.
+
+	-getElementById(): Selecciona un elemento por ID.
+	-getElementsByTagName(): Selecciona todos los elementos que coincidan con el nombre de la etiqueta especificada.
+	-querySelector(): Devuelve el primer elemento que coincida con el grupo especificado de selectores.
+	-querySelectorAll(): Deveuelve todos los elementos que coincidan con el grupo especificado de selectores.
+------------
+
+Metodos para definir, obtener y eliminar valores de atributos.
+	-setAttribute(): Modifica el valor de un atributo.
+	-getAttribute(): Obtiene el valor de un atributo.
+	-removeAttribute(): Remueve el valor de un atributo.
+-------------
+
+Atributos globales.
+	contentEditable: Indica si el elemento puede ser modificable por el usuario(bool).
+
+const titulo = document.queryselector(".titulo");
+
+titulo.setAttribute("contentEditable","false"/"true");
+
+	dir: Indica la direccionalidad del texto.
+
+const titulo = document.queryselector(".titulo");
+
+titulo.setAttribute("dir","ltr"/"rtl");
+
+	hidden: Indica si el elemento aun no es, o ya no es relevante.
+
+const titulo = document.queryselector(".titulo");
+
+titulo.removeAttribute("hidden");
+
+	tabindex: Indica si el elemento puede obtenes un focus de input.
+
+const titulo = document.queryselector(".titulo");
+
+titulo.setAttribute("tabindex","0");
+
+	title: Contiene un texto con informacion relacionada al elemento al que pertenece.
+
+const titulo = document.queryselector(".titulo");
+
+titulo.setAttribute("title","jjajjaja");
+---------------------
+
+Atributos de inputs:
+
+-className:Muestra el nombre del input.
+
+const input = document.querySelector(".input-normal");
+document.write(input.className);
+
+-value: Muestra el valor del input.
+
+const input = document.querySelector(".input-normal");
+document.write(input.value);
+
+-type: modifica el type.
+const input = document.querySelector(".input-normal");
+input.type = "range"/ text/ number/etc;
+
+-accept: Para aceptar el formato.
+const input = document.querySelector(".input-normal");
+input.accept = "image/gif";
+
+-form:
+
+-minLength: Para  definir la minima cantidad de caracteres.
+const input = document.querySelector(".input-normal");
+input.minLength = 8;
+
+-placeholder:
+const input = document.querySelector(".input-normal");
+input.placeholder = "Hola mundo";
+
+-required: Decide si es requerido o no.
+const input = document.querySelector(".input-normal");
+input.required = " ";
+-----------------------
+
+Atributo Style:
+-uso y ejemplo
+
+-Propiedades camel case
+------------------------
+
+
+Clases, clssList y Metodos de classList
+
+-add(): Añade una clase.
+const titulo = document.querySelector(".titulo");
+titulo.classList.add("grande");
+
+-remove(): Remueve una clase.
+const titulo = document.querySelector(".titulo");
+titulo.classList.remove("grande");
+
+-item(): Devuelve la clase del indice especificado.
+const titulo = document.querySelector(".titulo");
+let valor = titulo.classList.item(1);
+document.write(valor);
+
+-contains(): Verifica si ese elemento posee o no, la clase especificada.
+const titulo = document.querySelector(".titulo");
+let valor = titulo.classList.contains("grande");
+if(valor){
+	document.write("La clase existe");
+
+}else{
+	document.write("La clase NO existe");
+}
+
+-replace():Reemplaza una clase por otra.
+const titulo = document.querySelector(".titulo");
+let valor = titulo.classList.replace("grande","chico");
+document.write(valor);
+
+-toggle(): Si no tiene la clase especificada, la agrega, si ya la tiene la elimina.
+const titulo = document.querySelector(".titulo");
+nombreDeClase = "grande";
+let valor = titulo.classList.contains(nombreDeClase);
+titulo.classList.toggle("grande");
+
+------------------------
+
+Obtencion y modificacion de Elementos
+
+-textContent: Devuelve el texto de cualquier nodo.
+	const titulo = document.querySelector(".titulo");	
+	let resultado = titulo.textContent;
+	document.write(resultado);
+
+-innerHTML: Devuelve el contenido html de un elemento.
+	const titulo = document.querySelector(".titulo");	
+	let resultado = titulo.innerHTML;
+	alert(resultado);
+
+-outerHTML: Devuelve el contenido html completo del elemento.
+	const titulo = document.querySelector(".titulo");	
+	let resultado = titulo.outerHTML;
+	alert(resultado);
+
+-------------------------
+
+Creacion de Elementos
+
+-createElements(): Crea un elemento.
+	const contenedor = document.querySelector(".contenedor");
+	const item = document.createElement("LI");
+
+-createTextNode():
+	const contenedor = document.querySelector(".contenedor");
+	const item = document.createElement("LI");
+	const textDelItem = document.createTextNode("Este es el item de la lista");
+
+-appendChild(): Crea un elemento hijo.
+	const contenedor = document.querySelector(".contenedor");
+	const item = document.createElement("LI");
+	const textDelItem = document.createTextNode("Este es el item de la lista");
+	item.appendChild(textDelItem);
+	console.log(item);
+
+-createDocumentFragment(): Crea varios elementos a las ves.
+	const contenedor = document.querySelector(".contenedor");
+	const fragmento = document.createDocumentFragment();
+	
+	for(i = 0; i< 20; i++){
+	const item = document.createElement("LI");
+	item.innerHTML = "Este es el item de la lista";
+	fragmento.appendChild(item);
+	}
+	contenedor.appendChild(fragmento);
+
+------------------------
+
+Modificacion y obtencion de child (hijos)
+
+-firstChild: Obtener el primer nodo hijo.
+	cont contenedor = document.querySelector(".contenedor");
+	const primerHijo = contenedor.firsChild;
+	console.log(primerHijo);
+
+-lastChild: Obtener el ultimo nodo hijo.
+	cont contenedor = document.querySelector(".contenedor");
+	const ultimorHijo = contenedor.lastChild;
+	console.log(ultimorHijo);
+
+
+-firstElementChild: Obtener el primer elemento hijo.
+	cont contenedor = document.querySelector(".contenedor");
+	const primerHijo = contenedor.firstElementChild;
+	console.log(primerHijo);
+
+-lastElementChild: Obtener el ultimo elemento hijo.
+	cont contenedor = document.querySelector(".contenedor");
+	const ultimorHijo = contenedor.lastElementChild;
+	console.log(ultimorHijo);
+
+
+-childNodes: Devuelve todos los nodoshijos.
+	cont contenedor = document.querySelector(".contenedor");
+	const hijos = contenedor.childNodes;
+	console.log(hijos);
+
+-children: Devuelve todos los elementos hijos.
+	cont contenedor = document.querySelector(".contenedor");
+	const hijos = contenedor.children;
+	console.log(hijos);
+-------------------------
+
+Metodos de Childs (HIjos)
+
+-replaceChild(): Reemplazza el archivo. primero secoloca el nuevo y luego el que vas a cambiar.
+	const contenedor = document.querySelector(".contenedor");
+	const h2_nuevo = document.createElement("H2");
+	h2_nuevo.innerHTML = "Titulo";
+	h2_antiguo = document.querySelector(".h2");
+	contenedor.replaceChild(h2_nuevo,h2_antiguo);
+
+-removeChild(): Podemos eliminar un hijo de un alemento padre.
+	const contenedor = document.querySelector(".contenedor");
+	const h2_nuevo = document.createElement("H2");
+	h2_nuevo.innerHTML = "Titulo";
+	const h2_antiguo = document.querySelector(".h2");
+	contenedor.removeChild(h2_antiguo);
+
+-hasChildNodes(): Es para verificar si el elemento tiene un elemento hijo o no.
+	const contenedor = document.querySelector(".contenedor");
+	const h2_nuevo = document.createElement("H2");
+	h2_nuevo.innerHTML = "Titulo";
+	const h2_antiguo = document.querySelector(".h2");
+	let respuesta = contenedor.hasChildNodes();
+	if(respuesta){
+		document.write("El elemento tiene hijos");
+	} else { 
+		document.write("El elemento NO tiene hijos");
+	}
+
+--------------------------
+
+Propiedades de parents(Padres)
+
+-parentElement: Busca una etiqueta HTML padre.
+-parentNode: Busca una etiqueta Nodo padre.
+
+---------------------------
+
+Propiedades de siblings(Hermanos)
+
+-nextSibling: muestra el nodo que le sigue.
+-previousSibling: muestra el nodo previo.
+-nextElementSibling: muestra el elemento que le sigue.
+-previousElementSibling: muestra el elemento previo.
+
+----------------------------
+
+Nodos - Extras
+
+-closest(): Nos devuelve el elemento ascendentemas sercano.
+	const div = documentquerySelector(".div-3");
+	console.log(div.closest(".div"));
+
+----------------------------
+

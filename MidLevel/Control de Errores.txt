@@ -1,0 +1,137 @@
+Control de Flujo y manejo de errores.
+
+-Sentencias de bloque.
+	let nombre = "jorge";
+	{
+		let nombre = "pedro";
+		alert(nombre);
+	} // el bloque es lo que esta entre {};
+
+-Sentencias de control de flujo.
+	if(3 > 2){
+		alert("Es cierto");
+	}// son los if, else ir, else.
+
+-Sentencias de manejo de escepciones.*
+
+----------------
+
+Sentencia switch
+
+-Sintaxis y clausula case.
+	switch(expr){
+		case 1;
+			break;
+		case 2;
+			break;
+		case 3;
+			break;
+		default;
+	}
+/
+	let expr = "Pera";
+	switch(expr){
+		case "Banana":
+			console.log("esta fruta es amarilla");
+			break;
+		case "Pera":
+			console.log("tiene forma de campana");
+			break;
+		case "Manzana":
+			console.log("esta fruta es roja");
+			break;
+		default:
+			alert("No es ninguno");
+	}
+
+-break: Es para evitar que el resto se sigua ejecutando.
+
+-default: Si no es ninguna de las anteriores, decirle que ejecute otra cosa  (es como el esle)
+
+----------------
+
+*Escepciones y tipos de Escepciones
+
+-Definicion y usos: Es un error que nos salta durante la ejecucion de nuestro programa.
+
+-Escepciones ECMAScript: Son las que esta relacionadas a la tecnologia que esta detras de JavaScript.
+	-Error.
+	-EvalError.
+	-InternalError.
+	-ReferenceError.
+	-RangeError.
+	-SyntaxError.
+	-TypeError.
+	-URIError.
+	-etc.
+
+-DOMException y DOMError: Son las que estan relacionadas con el DOM.
+	-IndexSizeError.
+	-HierarchRequestError.
+	-WrongDocumentError.
+	-InvalidCharacterError.
+	-NoModificationAllowedError.
+	-NotFoundError.
+	-NotSupportedError.
+	-etc.
+
+----------------
+
+Try... Catch: sirve para evitar que se muestre un error. Sirve para manejar o controlar el error. No podemos controlar los errores de sintaxis.
+
+-Sintaxis.
+	try{
+	}
+	catch(error){
+	}
+
+-Objeto error
+-Catch Incondicional: Es el que no tiene nada dentro.
+	try{
+	
+	}
+	catch(error){
+		console.log("Ha ocurrido un error");
+	}
+
+-Catch Condicional
+	try{
+		ldjnvjn
+	}
+	catch(error){
+		if(3>5){
+			console.log("Ha ocurrido un error");
+		}else{
+			console.log("Hola");
+		}
+	}
+
+-Sentencia throw: Es para tirar un error.
+	try{
+		thorw "Hola";
+	}
+	catch(e){
+		console.log(e);
+	}
+	finally{
+	}
+
+-finally: Es ejecutarse a toda costa. Sobre escribe el valor retornado.
+	try{
+		console.log("No hay errores");
+	}
+	catch(error){
+		if(3>5){
+			console.log("Ha ocurrido un error");
+		}else{
+			console.log("Hola");
+		}
+	}finally{
+		console.log("Me muestro igual");
+	}
+
+-----------------
+
+
+
+

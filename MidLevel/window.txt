@@ -1,0 +1,112 @@
+Window
+   Hereda las propiedades de EventTarget
+
+-open(): Carga un recurso en el contexto de un nuevo navegador o uno que ya existe.
+	window.open("https://youtube.com");
+
+-close(): Cierra la ventana actual, o la ventana en laa que se llamo.
+	let youtubeURL= "https://youtube.com";
+	let ventana = window.open(youtubeURL);
+	ventana.close();
+
+-closed- Indica si la ventanareferenciada essta cerrada o no.
+	desde la consola
+		ventana.closed // esto devuelve true si esta cerrada la ventana y false si esta abierta.
+
+-stop(): Detiene la carga de recursos en el contexto de navegacion actual.
+	desde la consola
+		ventana.stop() // esto detiene la carga de la pagina.
+
+-alert(): Muestra un cuadro de alerta con el contenido especificado y un boton aceptar.
+	alert("Hola mundo");
+
+-print(): Abre el cuadro de dialogo con un mensaje para imprimir el documento actual.
+	print();
+
+-prompt(): Abre un cuadro de dialogo con un mensaje que solicita al usuario un dato (String).
+	prompt("Dame un dato");
+
+-confirm(): Abre un cuadro de dialogo con un mensaje y dos botones (aceptar y cancelar).
+	respuesta = confirm("¿Estas seguro que deseas salir del sitio web?");
+	console.log(respuesta);
+
+-screen: Devuelve una referencia al objeto de pantalla asociado con la ventana.
+	const screen = window.screen;
+	console.log(screen);
+	document.write(screen.availWidth);
+
+-screenLeft: Devuelve la distanciahorizontal entre el borde izquierdo del navegador y el borde izquierdo de la pantalla.
+	const screen = window.screenLeft;
+	document.write(screenLeft);
+
+-screenTop: Devuelve la distancia vertical entre el borde superior del navegador y el borde superior de la pantalla.
+	const screen = window.screenTop;
+	document.write(screenTop);
+
+-scrollX: Devuelve el numero de pixeles que el documento se desplaza actualmente horizontalmente.
+	const scrollX = window.scrollX;
+	alert(scrollX);
+
+-scrollY: Devuelve el numero de pixeles que el documento se desplaza actualmente verticalmente.
+	const scrollY = window.scrollY;
+	alert(scrollY);
+
+-scroll(): Desplaza la ventana a un lugar particular en el documento (con options y con posiciones).
+	en consola
+		window.scroll(0,100); // y se mueve el scroll en la posicion que le dijimos.
+
+-resizeBy(): Cambia el tamaño de la ventana actual en una cantidad especifica.
+	en consola
+		window.resizeBy(100,200); // habre la ventana del tamaño indicado de forma relativa.
+
+-resizeTo(): redimensiona dinamicamente la ventana.
+	en consola
+		window.resizeTo(100,200); // habre la ventana del tamaño indicado de forma absoluta.
+
+-moveBy(): Mueve la ventana en una ubicacion relativa.
+	en consola
+		window.moveBy(100,200); // mueve la ventana en la posicion indicado de forma relativa.
+
+-moveTo(): Mueve la ventana en una ubicacion absoluta.
+	en consola
+		window.moveTo(100,200); // mueve la ventana en la posicion indicado de forma absoluta.
+
+-------------------------
+   Objetos barprop
+
+-locationbar: window.locationbar.visible // true o false.
+-menubar: window.menubar.visible // true o false.
+-personalbar: window.personalbar.visible // true o false.
+-scrollbars: window.scrollbars.visible // true o false.
+-statusbar: window.statusbar.visible // true o false.
+-toolbar: window.toolbar.visible // true o false.
+
+--------------------------
+    Location
+
+-window.localtion.href: Devuelve el href (URL) de la pagina actal.
+	desde codigo
+		const href = window.location.href;
+		document.write(href); // devuelve donde esta ubicada la carpeta.
+
+	desde consola, en la pagina de youtube.
+		window.location.hostname // "http://www.youtube.com/"
+
+-window.location.hostname: Devuelve el nombre de dominio del servidor web.
+	desde consola, en la pagina de youtube.
+		window.location.hostname // "www.youtube.com"
+	
+-window.location.pathname: Devuelve la ruta y el nombre de archivo de la pagina actual.
+	desde consola, en la pagina de youtube.
+		window.location.pathname // "/channel/OUtoo4_P6ilcj7jwa4fmA5lQ"
+
+-window.location.protocol: Devuelve el protocolo web utilizado (http: o https :)).
+	desde consola, en la pagina de youtube.
+		window.location.protocol // "https:"
+
+-window.location.assign(): Carga n nuevo documento.
+	desde consola, en la pagina de youtube.
+		window.location.assign("http://youtube.com") // carga la pagina de youtube
+
+---------------------------
+ 

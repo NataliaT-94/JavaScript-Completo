@@ -1,0 +1,73 @@
+Herramientas de Desarrollo del navegador(chrome)
+
+Pestañas Elements
+
+-Filtros y buscar por palabra clave:
+-Modificar, crear y eliminar etiquetas:
+-Modificar propiedades de CSS:
+-Event Listeners:
+-Propertles:
+-Opciones para copiar:
+-Seguir explorando:
+
+--------------------
+
+Pestañas Resources
+
+-Ver y guardar archivos
+-Informacion ofrecida
+-Cambios en tiempo real
+-Snippets (Ejectar codigo por ffragmentos):
+
+---------------------
+
+Pestañas Networks
+
+-Interfaz
+-Sort BY y Filtros de Busqueda
+-Limpiar Cookies y Cache:
+-Importar y Exportar:
+
+---------------------
+
+Pestañas TimeLine / performars
+
+-Uso y Grabacion:
+-Screenshots de la grabacion
+-Controls
+-overvlew (FPS, CPU y Net)
+-Flame Chart
+-Details
+-Sugerencias de grabacion
+
+---------------------
+
+Pestañas Application
+
+-Applcatiion:
+-Storage:
+-Cache:
+-Background Services:
+-Frames:
+
+-----------------------
+
+Pestaña Console
+
+-Funcionamiento
+-Apilamiento de mensajes
+-Show timestamps
+-Borrar el historial
+_Conservar el historial
+-Guardar el historial
+-Eleccion de contexto de ejecucion
+-Filtrado de los resultados de Console
+-Filtros por nivel de gravedad
+	*Todos(muestra todos los resultados de console)
+	*Erros(Solo muestra los resultado de console error)
+	*Warnings(Solo muestra los resultado de console Warnings)
+	*Info(Solo muestra los resultado de console Info())
+	*Logs(Solo muestra los resultado de console Logs())
+	*Debug(Solo muestra los resultado de console timeline)
+
+

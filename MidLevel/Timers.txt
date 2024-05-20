@@ -1,0 +1,29 @@
+
+Timers (Temporizadores)
+
+-setTimeout(): A los cuantos tiempo se comienza a ejecutar.
+	setTimeout(()=>{
+		document.write("Hola");
+	}, 2000); // primer parametro es una funcion y el segunto el tiempo de cuando se va a ejecutar, en este caso en 2 segundos.
+/
+	const saludar = ()=>{
+		document.write("Hola");
+	};
+	setTimeout(saludar,2000);
+
+-setInterval(): nos ejecuta la funcion varias veces.
+	setInterval(()=>{
+		document.write("Hola");
+	}, 2000); // ejecuta la funcion cada 2 segundos.
+
+-clearTimeout(): Cuando dejar de ejecutar.
+	Const temporizador = setTimeout(()=>{
+		document.write("Hola");
+	}, 2000);
+	clearTimeout(temporizador);
+
+-clearInterval(): deja de ejecutar el intervalo.
+	const intervalo = setInterval(()=>{
+		document.write("Hola");
+	}, 2000);
+	clearInterval(intervalo);

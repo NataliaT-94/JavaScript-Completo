@@ -1,0 +1,45 @@
+Metodos:
+
+sqrt(): Devuelve la raiz cuadrada positiva de un numero.
+	numero= Math.sqrt(25);
+	document.write(numero); / devuelde: 5. porq es la raiz cuadrada de 25.
+
+cbrt(): Devuelve la raiz cubica de un numero.
+	numero= Math.sqrt(27),
+	document.write(numero); / devuelde: 3. porq es la raiz cubica de 27.
+
+max(): Devuelve el mayor de cero o mas numero. Solo trabaja con numeros nada mas.
+	numero= Math.max(25,1,4,56,78,6);
+	document.write(numero); / devuelde: 78. porq es el numero mas grande.
+
+min(): Devuelve el  mas pequeño de cero o mas numeros.
+	numero= Math.min(25,1,4,56,78,6);
+	document.write(numero); / devuelde: 1. porq es el numero mas chico.
+
+random(): Devuelve un numero pseudo-aleatorio entre 0 y 1.
+	numero= Math.random();
+	document.write(numero); / devuelde: 0.134577. porq es un numero aleatorio.
+round(): Devuelve el valor de un numero redondeado al numero entero mas cercano.
+	numero= Math.random()*100; 
+	document.write(numero); / devuelde: 0.134577. porq es un numero aleatorio.
+fround(): Devuelve la representacion flotante de precision simple mas cercana de un numero.
+floor(): Devuelve el mayor entero menor que o igual a un numero. Redondea para abajo.
+	numero= Math.random()*100; 
+	numero= Math.floor(4.999);
+	document.write(numero); / devuelde: 4. porque siempre redondea para abajo.
+
+trunc(): Devuelve la parte entera del numero x, la eliminacion de los digitos fraccionarios.
+
+----
+
+Propiedades:
+
+PI: Ratio de la circunferencia de un circlo respecto a su diametro, aproximadamente 3..14159.
+SQRT1_2: Raiz cuadrada de 1/2; Equivalentemente, 1 sobre la raiz cuadrada de 2, aproximadamente 0.707.
+SQRT2: Raiz cuadrada de 2, aproximadamente 1.414
+
+E: Constante de euler, la base de los logaritmos naturales, aproximadamente
+LN2: Logaritmo natural de 2, aproximadamente 0.693.
+LN10: Logaritmo natural de 10, aproximadamente 2.303.
+LOG2E: Logaritmo E con base 2, aproximadamente 1.443.
+LOG10E: Logaritmo E con base 10, aproximadamente 0.434.

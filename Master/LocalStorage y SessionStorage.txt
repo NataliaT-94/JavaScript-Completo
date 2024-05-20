@@ -1,0 +1,8 @@
+LocalStorage y SessionStorage
+-Diferencias
+-setItem()
+-removeItem()
+-clear()
+-Ejemplo de uso (Idioma)
+
+--------------------

@@ -1,0 +1,198 @@
+Eventos
+
+-Definicion: Cualquier cambio que ocurre en la pagina. Se ejecuta en conjunto a otra cosa.
+
+-DE Eventos o "Event Handlers"
+	const buttton = document.querySelector(".button");
+	button.onclick = ()=>{ //el vento es click y elhandlers en on
+		alert("Hola mundo");
+	} 
+
+-Escucha de eventos o "Event Listeners"
+	const buttton = document.querySelector(".button");
+	button.addEventListener("click",saludar); // se coloca primero el evento en este caso "click" y luego el nombre de la funcion en este caso 'saludar'.
+	function saludar(){ // solo finciones normal, NO flecha.
+		alert("Hola mundo");
+		button.removeEventListener("click", saludar);// si queremos remover el listener.
+	}
+
+/
+
+const buttton = document.querySelector(".button");
+	button.addEventListener("click",()=>{
+		alert("Hola mundo")}); // La funcion flecha se utiliza de esta manera.
+	
+-El objeto Event: Nos muestra que objeto se esta ejecutando.
+
+	const buttton = document.querySelector(".button");
+	button.addEventListener("click",(e)=>{ // e: es el nombre q se usa por defecto para nombrar al objeto.
+		console.log(e.target)});
+
+-Flujo de Eventos o "event flow": Nos referimos al orden con el que se van a ejecutar los eventos, puede ser del mas especifico al menos especifico o viceversa, tenemos dos formas:
+
+	-Event Bubbling (Burbuja): Este es el que viene por defecto. Se ejecuta del mas especifico al menos especifico.
+	const button = document.querySelector(".button");
+	const contenedor = document.querySelector(".contenedor");
+	contenedor.addEventListener("click",(e)=>{
+		alert("Di click en el contenedor"});
+
+	button.addEventListener("click",(e)=>{
+		alert("Di click en un boton")};
+// Se ejecuta pimero el button, porque esta mejor especificado.
+
+	-Event Capturing (Captura): Se ejecuta segun nosotros le indiquemos con el true.
+	const button = document.querySelector(".button");
+	const contenedor = document.querySelector(".contenedor");
+	contenedor.addEventListener("click",(e)=>{
+		alert("Di click en el contenedor")},true);
+
+	button.addEventListener("click",(e)=>{
+		alert("Di click en un boton")});
+
+// Se va a ejecutar primero el contenedor, ya que tiene el true.
+
+-eventstopPropagation(): Detiene la propagacion del evento.
+	const button = document.querySelector(".button");
+	const contenedor = document.querySelector(".contenedor");
+	contenedor.addEventListener("click",(e)=>{
+		alert("Di click en el contenedor")});
+
+	button.addEventListener("click",(e)=>{
+		alert("Di click en un boton");
+		e.stopPropagation();
+	});
+// Solo se ejecuta el button, ya que le indicamos que una vez que se ejecute se detenga ahi mismo.
+
+----------------------
+
+Evbentos del Mouse
+
+-click: ocurre con el click.
+	const button = document.querySelector(".button");
+	button.addEventListener("click",(e)=>{
+		alert("Di click en el boton")});
+
+-dblclick: Ocurre con un doble click.
+	const button = document.querySelector(".button");
+	button.addEventListener("dblclick",(e)=>{
+		alert("Di click en el boton")});
+-mouseover. Ocurre cuando el puntero se mueve sobre un elemento o sobre uno de sushijos.
+	const button = document.querySelector(".button");
+	button.addEventListener("mouseover",(e)=>{
+		alert("Di click en el boton")});
+
+-mouseout: Ocurre cuando se mueve el puntero fuera de un elemento o de sus elementos secundarios.
+	const button = document.querySelector(".button");
+	button.addEventListener("mouseout",(e)=>{
+		alert("Di click en el boton")});
+
+-------otros----------
+
+-contextmenu: Ocurre con un click enel boton derecho en un elemto para abrir un menu contextual.
+	const button = document.querySelector(".button");
+	button.addEventListener("contextmenu",(e)=>{
+		alert("Di click en el boton")});
+
+-mouseerter: Ocurre cuando el puntero se mueve sobre un elemento.
+	const button = document.querySelector(".button");
+	button.addEventListener("mouseerter",(e)=>{
+		alert("Di click en el boton")});
+// Solo funciona con el navegador.
+
+-mouseleave: Ocurre cuando el puntero se mueve fuera de un elemento.
+	const button = document.querySelector(".button");
+	button.addEventListener("mouseleave",(e)=>{
+		alert("Di click en el boton")});
+
+-mousedown: Ocurre cuando un usuario apreta un boton del mouse sobre un elemento.
+	const button = document.querySelector(".button");
+	button.addEventListener("mousedown",(e)=>{
+		alert("Di click en el boton")});
+
+-mouseup: Ocurre cuando un usuario suelta un boton del mouse sobre un elemento.
+	const button = document.querySelector(".button");
+	button.addEventListener("mouseup",(e)=>{
+		alert("Di click en el boton")});
+
+-mousemove: Ocurre cuando el puntero se mueve mientras esta sobre un elemento.
+	const button = document.querySelector(".button");
+	button.addEventListener("mousemove",(e)=>{
+		alert("Di click en el boton")});
+// Solo funciona con el navegador.
+
+--------------------------
+
+Eventos Teclado
+
+-keypress: Ocurre cuando una tecla se presiona y se suelta 
+	const input = document.querySelector(".input-prueba");
+	input.addEventListener("keypress",(e)=>{
+		console.log("Una tecla fue presionada");
+	});
+
+-keydown: Ocurre cuando una tecla se deja de presionar.
+	const input = document.querySelector(".input-prueba");
+	input.addEventListener("keydown",(e)=>{
+		console.log("Un usuario presiono una tecla y la solto");
+	});
+
+-keyup: Ocurre despues de que los dos eventos anteriores hayan concluido consecutivamente.
+	const input = document.querySelector(".input-prueba");
+	input.addEventListener("keyup",(e)=>{
+		console.log("Una tecla fue soltada");
+	});
+
+--------------------------
+
+Eventos de la interfaz
+
+-error: Ocurre cuando sucede un error durante la carga de un archivo multimedia.
+	const img = document.querySelector(".img-prueba");
+	img.addEventListener("error",()=>{
+		console.log("Ha sucediddo un error");
+	});
+
+-load: Ocurre cuando un objeto se ha cargado.
+	window.addEventListener("load",()=>{
+		console.log("Ha cargado el sitio");
+	});
+
+-beforeunload: Ocurre antes de que el documento este a punto de descargarse.
+	window.addEventListener("beforeunload",()=>{
+		console.log("Ha sucediddo un error");
+	});
+
+-unload: Ocurre una vez que se ha descargado una pagina.
+	window.addEventListener("unload",()=>{
+		console.log("Te estas por ir del sitio");
+	});
+
+-resize: Ocurre cuando se cambia el tamaño de la vista del documento.
+	window.addEventListener("resize",()=>{
+		console.log("Se a actualizado la resolucion");
+	});
+
+-scroll: Ocurre cuando se desplaza la barra de desplazamiento de un elemento.
+	window.addEventListener("scroll",()=>{
+		console.log("Se ha scrolleado");
+	});
+
+-select: Ocurre despues de que el usuario selecciona algun texto de <input> o <textarea>.
+	const input = document.querySelector(".input-prueba");
+	input.addEventListener("select",(e)=>{
+		console.log(e.target.selecteionStart);
+	});
+// me muestra en consola cuando comenzo la seleccion. 
+
+	const input = document.querySelector(".input-prueba");
+	const contenedor = document.querySelector(".seleccionado");
+	input.addEventListener("select",(e)=>{
+		let start = e.target.selecteionStart;
+		let end = e.target.selecteionEnd;
+		let textoCompleto = input.value;
+		contenedor.innerHTML = textoCompleto.substring(staart,end);
+	});
+// me muestra la palabra que se selecciono.
+
+------------------
+

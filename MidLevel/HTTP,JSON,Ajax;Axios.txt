@@ -1,0 +1,174 @@
+Peticiones HTTP
+
+-Definicion: Es una peticion de informacion que nosotros le hacemos a un servidor, y el servidor nos devuelve una data.
+
+-Cliente & servidor: El cliente somos nosotros y el servidor es quien procesa toda la informacion.
+
+-No guardan inoformacio.
+
+-------------------
+
+json: Son datos estructurados.
+
+-Definicion, usos y sintaxis. 
+	const objeto ={
+		"variable1": "Jorge", // cuando las variables esstan entre "" eso es un JSON, facilitan el envio de informacion hacia un servidor.
+		"variable2": "Roberto"
+	};
+	console.log(objeto.variable1);
+
+-Serializacion: Es cuando un Json es una cadena de texto.
+	const objeto ='{"variable1": "Jorge","variable2": "Roberto"}';
+
+ -Deserializacion.
+	const objeto ={"variable1": "Jorge","variable2": "Roberto"};
+
+
+-Metodo parse() - Convierte un string con estructura de JSON a Formato JSON (deserializar).
+	const serializar = '{"variable1": "Jorge","variable2": "Roberto"}';
+
+	const deserializado = JSON.parse(serializar);
+	console.log(typeof deserializado);
+
+-Metodo stringify() - Convierte un dato de JavaScript en una caena de texto JSON(serializar).
+	const deserializar = {"variable1": "Jorge","variable2": "Roberto"};
+
+	const serializar = JSON.stringify(deserializado);
+	console.log(typeof serializado);
+
+-JSON PolyFill - https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Global_Objects/JSON/parse:
+Es una funcion que simula un JSON.
+
+-------------------------
+
+Ajax
+
+-Introduccion e instalacion del servidor.
+Sirve para devolver la respuessta del servidor sin necesidad de actualizar la pagina.
+Instalamos XAMPP.
+
+-Objeto XMLHttpRequest: Podemos enviar peticiones GET y POST.
+	-Enviar peticiones GET: Lo vemos en la URL.
+	-Trabajar el resultado de las peticiones.
+		const peticion = new XMLHttpRequest();
+
+		peticion.addEventListener("load",()=>{
+			console.log(peticion.response)
+		});
+		peticion.open("GET", "information.txt");
+		peticion.send();
+
+-Objeto ActiveXObject: Es para que se pueda utilizar con internet Explore.
+     -Nueva forma de trabajar el resultado.
+	let peticion;
+
+	If(window.XMLHttpRequest) peticion = new XMLHttpRequest();
+	else peticion = new ActiveXObject("Microsoft.XMLHTTP");
+
+	peticion.addEventListener("load",()=>{
+		let respuesta;
+		if(peticion.status == 200) respuesta = peticion.reponse;
+		else respuesta = "Lo siento, no se ha encontrado el recurso";
+		console.log(JSON.parse(respuesta).nombre)
+	});
+	peticion.open("GET", "information.txt");
+	peticion.send();
+
+-Enviar peticiones POST: los datos no se envian por la URL.
+	let peticion;
+
+	If(window.XMLHttpRequest) peticion = new XMLHttpRequest();
+	else peticion = new ActiveXObject("Microsoft.XMLHTTP");
+
+	peticion.addEventListener("load",()=>{
+		let respuesta;
+		if(peticion.status == 200 || peticion.status == 201) respuesta = peticion.reponse;
+		else respuesta = "Lo siento, no se ha encontrado el recurso";
+		console.log(JSON.parse(respuesta))
+	});
+	peticion.open("POST", "https://reqres.in/api/users");
+	peticion.setRequestHeader("Content-type","application/json;charset=UTF8");
+		
+	peticion.send(JSON.stringify({
+		"nombre": "dalto",
+		"trabajo": "programador"
+	}));
+
+--------------------
+
+fetch
+-Basado en promesas: Siempre nos devuelve una promesa encapsulada. Tiene el metodo GET por defecto. los datos que devuelve es en forma de promesa.
+	peticion = fetch("https://reqres.in/api/unknown/2");
+	peticion.then(res=>console.log(res));
+	console.log(peticion);
+
+-Objeto fetch.
+-text(): Desencapsulamos el valor de la promesa en un texto.
+	fetch("https://reqres.in/api/unknown/2");
+		.then(res=>res.text());
+		.then(res=>console.log(res));
+
+-json(): Desencapsulamos el valor de la promesa en formato json.
+	fetch("https://reqres.in/api/unknown/2");
+		.then(res=>res.json());
+		.then(res=>console.log(res));
+
+///////
+
+	fetch("https://reqres.in/api/users",{
+		method: "POST",
+		body: `{"nombre": "Lucas","apellido: "Ramirez"}`),
+		headers:{"Content-type" : "application/json"}
+	}).then(res=>res.json());
+	  .then(res=>console.log(res));
+-formatoData().
+-arrayBuffer().
+
+-blob(): crea unaURL donde almacena la informacion, de forma provisoria, para oder mostrarla.
+	const imagen = document.querySelector(".imagen");
+
+	fetch("diferencia.png");
+		.then(res=>res.blob());
+		.then(img=>imagen.src = URL.createObjectURL(img));
+
+--------------------
+
+Libreria Axios
+-Introduccion e instalacion: https://github.com/axios/axios
+	Es el reemplazo de fetch, La respuestas no viene encapsulados. No hace falta convertirlas.
+-Basado en promesas.
+-Objeto axios.
+-metodo get() y post().
+-formas de enviar los datos.
+-ventajas.
+
+	axios("informacio.txt");
+		.then(res=>console.log(res.data));
+//////////////
+	axios.post("https://reqres.in/api/users",{
+		"nombre": "lucas",
+		"apellido": "ramirez"
+	});
+		.then(res=>console.log(res));
+
+
+---------------------
+
+fetch y axios con async y await
+
+const getName = async ()=>{
+	let peticion = await fetch("informacion.text");
+	let resultado = await peticion.json();
+	console.log(resultado);
+}
+getName();
+
+////////////////
+
+const getName = async ()=>{
+	let peticion = await axios("informacion.text");
+	let resultado = await peticion;
+	console.log(resultado);
+}
+getName();
+

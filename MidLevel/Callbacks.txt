@@ -1,0 +1,182 @@
+callbacks:
+
+-Concepto (Function in funtion): Es una funcion dentro de otra funcion. Es decir es una funcion que pasamos como parametro otra funcion.
+	funtion prueba(callback){
+		callback("Roberto");
+	};
+	funtion decirNombre(nombre){
+		console.log(nombre);
+	};
+
+	prueba(decirNombre);
+
+-Ejemplo:
+
+	class Persona{
+		constructor(nombre, instagram){
+			this.nombre = nombre;
+			this.instagram = instagram;
+		}
+	};
+
+	const data =[
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"]
+	];
+
+	const personas = [];
+
+	for(let i = 0; i< data.length; i++){
+		personas[i] = new Persona(data[i][0],data[i][1]);
+	}
+
+	const obtenerPersona = (id, cb)=>{
+		if(personas[id] == undefined){
+			cb("No se ha encontrado la persona");
+		} else{
+			cb(null, personas[id],id);
+		}
+	}
+
+	const obtenerInstagram = (id,cb)=>{
+		if(personas[id] == undefined){
+			cb("No se ha encontrado el instagram");
+		} else{
+			cb(null,personas[id].instagram);
+		}
+	};
+
+	obtenerPersonas(5,(err,persona,id)=>{
+		if(err){
+			console.log(err);
+		} else{
+			console.log(persona.nombre);
+			obtenerInstagram(id,(err,instagram)=>{
+				if(err){
+					console.log(err);
+				} else{
+					console.log(instagram);
+				}
+		});
+		}
+	});
+
+
+-Problemas de los callbacks
+
+--------------------
+
+Promesas
+
+-Concepto: Son objetos que tienen dos callbacks (resolve, reject).
+	let lnombre = "pedro";
+	const promesa = new Promise((resolve,reject)=>{
+		if(nombre !== "pedro") reject("Lo siento, el nombre no es 		pedro")
+		else resolve(nombre)
+	});
+
+	promera.then(resultado)=>{
+		console.log(resultado);
+	}).catch((e)=>{
+		console.log(e);
+	});
+
+-¿Que puede representar?
+	-resolve: Terminaciones de una operacion asincrona.
+	-reject: Fracasode una operacion asincrona.
+
+-Ejemplo y solucion al problema de los callbacks
+	class Persona{
+		constructor(nombre, instagram){
+			this.nombre = nombre;
+			this.instagram = instagram;
+		}
+	};
+
+	const data =[
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"],
+		["Lucas Ramirez,"@Ramirez"]
+	];
+
+	const personas = [];
+
+	for(let i = 0; i< data.length; i++){
+		personas[i] = new Persona(data[i][0],data[i][1]);
+	}
+
+	const obtenerPersona = (id,)=>{
+		return new Promise((resolve,reject)=>{
+			if(personas[id] == undefined) reject("No se 			ha encontrado la persona");
+			else{resolve(personas[id])}
+		})
+	}
+
+	const obtenerInstagram = (id)=>{
+		return new Promise((resolve,reject)=>{
+			if(personas[id].instagram == undefined) reject("No se 			ha encontrado el instagram");
+			else{resolve(personas[id].instagram)}
+		})
+	};
+
+	let id = 5;
+
+	obtenerPersonas(id).then((persona)=>{
+		console.log(persona.nombre);
+		return obtenerInstagram(id);
+	}).then((instagram)=>{
+		console.log(instagram)
+	}).catch((e)=>
+		console.log(e);
+	});
+
+
+----------------------
+
+Funciones asincronas (Operador Async)
+
+-Usos
+-Operador Await
+
+const objeto = {
+	propiedad1 : "valor1",
+	propiedad2 : "valor2",
+	propiedad3 : "valor3"
+};
+
+const obtenerInformacion =()=>{
+	return new Promise((resolve,reject)=>{
+		setTimeout(()=>{resolve(objeto)},3000)
+	})
+}
+
+const mostrarResutado = async()=>{
+	resultado = await obtenerInformacion();
+	console.log(resultado);
+}
+
+mostrarResultado();
+
+///////////
+
+const obtenerInformacion =(text)=>{
+	return new Promise((resolve,reject)=>{
+		setTimeout(()=>{resolve(text)},Math.random()*200)
+	})
+}
+
+const mostrarResutado = async()=>{
+	data1 = await obtenerInformacion("1:Lucas");
+	data2 = await obtenerInformacion("2:Alan");
+	data3 = await obtenerInformacion("3:Joni");
+	console.log(data1);
+	console.log(data2);
+	console.log(data3);
+}
+
+mostrarData();

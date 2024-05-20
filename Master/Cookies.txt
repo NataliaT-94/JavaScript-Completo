@@ -1,0 +1,87 @@
+Cookies: Son datos que recomienda la pagina en el navegador del usuario. Son archivos que las paginas web crean y se guardan en el navegador
+
+tipos de cookies
+
+Exceptuadas:
+-Cookies de entrada de usuario
+-Cookies de identificacion o autenticacion del usuario.(Unicamente de sesion).
+-Cookies de seguridad del usuario
+-Cookies de reproductor multimedia
+-Cookies de sesion para equilibrar la carga
+-Cookies de perzonalizacion de la interfaz de usuario
+-Cookies de complemento (plug-in) para intercambiar contenidos sociales.
+
+No Exceptuadas:
+-El resto de cookies.
+
+Cookies segun el tiempo que permanecen activadas:
+-Cookies de sesion: Son un tipo de Cookies diseñadas para recabar y almacenar datos mientras el usuario accede a una pagina web.
+-Cookies persistentes:Son un tipo de cookies en el quee los datos siguen almacenados en el terminal y puedenser accedidos ytratados durante un periodo definido  por el responsable de la cookie y que puede ir de unos minutos a varios años.
+
+Cookies segun entidad que la gestione:
+-Cookies propias:Son aquellas que se envian al equipo terminal del usuario desde un equipo o dominio gestionado por el propio esditor y desde el que se presenta el servicios solicitado por el usuario.
+-Cookies de terceros: Son aquellas que se envian al equipo terminal de usuario desde un equipo o dominio que no es gestionado por el editor, sino por otra entidad que trata os datos obtenidos a traves de las cookies.
+
+Cookies segun la finalidad:
+-Cookies de analisis: Son aquellas que, bien tratadas por el titular del sitio, o por terceros, permiten cuantificar el numero de usuarios y asi realizar la medicion y analisis estadistico de la utilizacion, que hacen los usuarios del servicio ofertado.
+Para ello, se alaliza su navegacion en la pagina web, con el fin de mejorar la oferta de productos o servicios que le ofrecemos.
+-cookies publicitarias: Son aquellas que permiten la gestion de la forma mas eficaz posible, de los espacios publicitarios que , en su caso, el editor haya incluidoen una pagina web, aplicacion o plataforma desde la que presta el servicio solicitado en base a criterios como el contenido editado ola frecuencia en la que se muestran los anuncios.
+-Cookies sociales : son necesarias para las redes sociales externas(Facebbok,Twitter, Pinterest, Instagram, etc...).Su Funcion es controlar la interaccion con los widgets sociales dentro de la pagina.
+-Cookies de publicidad comportamentales: Son aquellas que permiten la gestion, de la forma mas eficaz posible, de los espacios publicitarios que, en su caso, el editor haya incluido en una pagina web, apicacion o platafora desde la que presta el servicio solicitado. Estas cookies almacenan informaciondel comportamiento de usuarios obtenida a traves de la observacion continuada de sus habitos de navegacion, lo que permite desarrollar un perfil  especifico para mostrar publicidad en funcion del mismo.
+
+Tambienes posicble qque al visitar alguna pagina web o al abrir algun email donde se publique algun anuncio o alguna promocion sobre determinados productos o servicios se instale en el navegador alguna cookie que se utiliza para mostrar posteriormente publicidad relacionada con la busqueda que se haya realizado , para desarrollar un control de los anuncios en relacion, por ejemplo, con el numero de veces que son vistos, donde aparecen, a que hora se ven, etc.
+
+
+Cookies
+
+-Definicion y usos comunes(Diferenciar usuarios, UX, Ads, etc...)
+-Formas de clasificar cookies.
+-Crear una cookie
+	COOKIES:  clave=valor;atr;atr;atr;atr
+
+---
+	const newFechaUTC =dias =>{
+		let fecha = new Date();
+		fecha.setTime(fecha.getTime() + dias*1000*60*60*24);
+		return fecha.toUTCString(dias)
+	}
+
+	const crearCookie = (name,dias)=>{
+	expires =newFechaUTC(dias)
+	document.cookie= `${name};expires=${expires}`;
+	}
+	
+	crearCookie("usuario=Natt","4");
+
+
+-Metodos encodeURIComponent() y decodeURIComponent()
+
+-Leer una cookie
+
+	document.cookie
+
+-obtener una cookie:
+
+	const obtenerCookie = cookieName =>{
+		let cookies = document.cookies;
+		cookies = cookies.split(";"); // split: separa los arrays con ;
+		for(i=0; cookies.lenght>i; i++){
+			cookie = cookies[i].trim();// trim: elimina los espacios en blanco.
+			if(cookie.startsWith(cookieName)){
+				return cookie.split("=")[1];
+			}	
+		}
+		return "No hay cookies con ese nombre";
+	}
+
+	obtenerCookie("Natt");
+
+-Modificar una cookie
+
+	document.cookie = "nombre=Techeira";
+
+-Borrar una cookie
+
+	document.cookie = "nombre=Techeira; max-age=0";
+
+-Ejemplo de uso(Aviso de uso de cookies, cumplimiento con el RGPD y la ePrivacy).

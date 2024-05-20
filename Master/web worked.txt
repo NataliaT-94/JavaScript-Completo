@@ -1,0 +1,263 @@
+web workers
+
+-Tipos de web workers(Dedicated Worker, Shared Worker, Service Worker y Abstract Worker)
+
+-Dedicated Workwer: Worker()(constructor)
+
+-Parametro Options (
+	*type: DOMString Especifica el tipo de trabajador a crear. El valor puede ser classic o module. Si no se especifica, el predeterminado utilizado es classic.
+	*credentials: DOMString Especifica el tipo de credenciales que se utilizaran para el trabajador. El valor puede ser ',' o '.' Si no se especifica, o si el tipo es, el valor predeterminado utilizado es( no se requieren credenciales). omit, same-origin o include.
+	*name:DOMString Especifica un nombre de identificacion para DedicatedWorkerGlobalScoper representar el alcance del trabajador, que es principalmente util para fines de depuracion. ).
+
+-Metodo postMessage() (Enviar mensajea¿s entre el web worker y el script principal)
+
+	script.js= const worker = new Worker("worker.js");
+	   document.querySelector(".button").addEventListener("click",()=>ejecutarBucle());
+
+	   const ejecutarBucle = ()=>{
+		worker.postMessage(true);
+	   }
+
+	worker.js=
+	addEventListener("message", ejecutarBucle);
+
+-Evento onmenssage(Recibir mensajes entre el web worker y el script principal)
+
+-Metodo terminate()(Finalizar la ejecucion del web worker)
+
+	script.js= const worker = new Worker("worker.js");
+	   document.querySelector(".button").addEventListener("click",()=>ejecutarBucle());
+
+	   const ejecutarBucle = ()=>{
+		worker.postMessage(true);
+	        setTimeout(()=>{
+			worker.terminate()
+	    	},2000);
+	   }
+
+	worker.js=
+	addEventListener("message", ejecutarBucle);
+
+-Politica de origen cruzado (Same-Origin)
+
+-------
+
+Service Workers: es un archivo js, que intersepta todas las peticiones de un servidor. Los serviceWorker ya se quedan instalados en las computadoras.
+
+-interfaz serviceWorker
+-Registrar un service worker con el metodo Register()
+	script.js=
+	if(navigator.serviceWorker){// verificamos que el navegador soporte el serviceWorker
+		navigator.serviceWorker.registre("sw.js")// registramos el serviceWorker
+
+-serviceWorker lifeCycle: https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle
+	sw.js=
+	self.addEventListener("install",e=>{
+		console.log("instalando service worker")
+	})
+	self.addEventListener("activate",e=>{
+		console.log("el service worker esta activo")
+	})
+	self.addEventListener("error",e=>{
+		console.log("error del service worker")
+	})
+	
+
+-Enviar mensajes con el metodo postMessage()
+	script.js=
+	if(navigator.serviceWorker){
+		navigator.serviceWorker.registre("sw.js")
+	}
+	
+	navigator.serviceWorker.ready.then(res=> res.active.postMessage("Hola, como estas?"));
+
+	navigator.serviceWorker.addEventListener("message",e=>{
+		console.log("Mensaje recibido del serviceWorker");
+		console.log(e.data);
+	sw.js=
+	self.addEventListener("message",e=>{
+		console.log("Mensaje recibido del navegador")
+		console.log(e.data);
+	e.source.postMessage("Hola, muy bien");
+	})
+
+-Evento fetch
+	sw.js=
+	self.addEventListener("fetch",()=>{ // se esta enviando una solicitusd a este serviceWorker
+		console.log("service worker interseptando peticion")
+	})
+-Registrar ceche y mostrar sitio web offline:
+
+	sw.js=
+	letversion = "version 1";
+	
+	self.addEventListener("install",e=>{
+		console.log("instalando service worker")
+		caches.open(version).then(cache=>{
+			cache.add("index.html").then(res=>{
+				console.log("informacion cacheada");
+			}).catch(e=>{
+				console.log(e);
+			})
+		})
+	})
+
+	self.addEventListener("activate",()=>{// sirve para eliminar caches anteriores
+		caches.keys().then(key=>{
+			return Promise.all(
+				key.map(cache=>{
+					if(cache !== version){
+						console.log("cahe antiguo, Eliminado");
+						return cache.delete(cache);
+					}
+				})
+			)
+		})
+	})
+
+	self.addEventListener("fetch",e=>{
+		e.respondWith(async function()=>{
+			const respuestaEnCache = await caches.match(e.request);
+			if(respuestaEnCache) return respuestaEnCache;
+			returne.request)
+		})
+	})
+
+-Chat raltime
+
+------------------------------
+
+Objeto Navigator
+
+-NavigatorID
+-NavigatorLanguage
+-NavigatorOnline
+-NavigatorContentUtils
+-NavigatorStorageUtils
+-NavigatorCokies
+-NavigatorConcurrentHardware
+-NavigatorPlugins
+-NavigatorUserMedia
+-----
+
+propiedades estandar del navegador.
+
+-NavigatorIDCodeName: Devuelve el nombre codigo interno del navegador actual. No siempre es correcto.
+
+-NavigatorID.appName: Devuelve el nombre oficial del navegador. No siempre es correcto.
+
+-NavigatorID.appVersion: Devuelve la version del navegador. No siempre es correcto.
+
+-NetworkInformation.connection: Provee un objeto NetworkiInformation.
+
+-NavigatorGeolocattion.geolocation: Devuelve un objeto geolocation.
+
+-NavigatorConcurrentHaerdware.hardwareConcurrency: Devuelve el numero de nucleos de procesador logicos disponibles.
+
+-NavigatorLanguage.language: Devuelve el idioma elegido por el usuario( o el que esta por defecto), o devuelve null
+
+-NavigatorLanguage.language: Devuelve un arreglo de strings que representan los idiomas conocidos por el usuario.
+ -ETC..
+------
+Metodos Estandares del navegador
+
+-NavigatorUserMedia.getUserMedia(): Solicita permiso y devuelve el stream de multimedia asociado a la camara o microfono del dispositivo
+
+-Navigator.registerContentHandler(): Permite a los web sites registrarse como posibles controladores de un tipo MIME determinado.
+
+-Navigator.registerProtocolHandler(): Permite a los sitios webs registrarse como posibles controladores de un protocolo determinado.
+
+-Navigator.requestMediaKeySystemAccess(): Devuelve un objeto Promise para un objeto MediaKeySystemAccess.
+
+-NavigatorPlugins.javaENabled(): Devuelve el valor Boolean que indivca si el navegador tiene o no habilitado java.
+
+-Navigator.sendBeacon(): Usado paratransfeis, de forma asincrona, conjuntos pequeños de datos HTTP del agente usuario al servidor.
+
+-Navigator.vibrate(): causa vibracion en el dispositivo que la soporta. No hece nada si el soporte para vibracion no esta disponible.
+
+---------------------
+
+Memorization: Acorta tiempos de ejecucion para que la experiencia del usuario sea mucho mas optima.
+
+	let cache = [];
+
+	const memoizer = func =>{
+		return e => {
+			const index = e.toString()
+			if(cache[index] == undefined){
+			cache[index] = func(e);
+			}
+			return cache[index];
+		}
+	}
+	
+	const hacerAlgo = num =>{
+		const a = 20;
+		const b = 12;
+		let c = 0;
+		for let i = num -1; i>=0; i--){
+			for(let j=i-1; j>=0; j--){
+				c+= a*b;
+			}
+		}		
+		return c;
+	}
+ 
+	const memo = memoizer(haceAlgo);
+
+	const date1 = new Date();
+	memo(30000);
+	console.log (new Date() - date1);
+
+	const date2 = new Date();
+	memo(30000);
+	console.log (new Date() - date2);
+
+-------------
+
+cache: Es como una memoria a corto plazo, lo que hace es almacenar informacion para que no se solicite muchas veces, asi poder acortar el tiempo de carga de la pagina.
+
+-Cache.add(requests): Toma una URL, la recupera y agrega el objeto de respuesta resultante a la cache dada. Esto es funcionalmente equivalente a llamar fetch() y luego usar put() para agregar los resultados a la cache.
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		cache.add("index.html"); // si el cache existe me almacena el index.html
+	})
+
+-Cache.addAll(requests): Toma una matriz de URL, las recupera y agrega los objetos de respuesta resultantes a la cache dada.
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		cache.addAll(["index.html","estilo.css","script.js"]); // si el cache existe me almacena todos los archivos del array.
+	})
+
+-Cache.match(request, options): Devuelve un Promise que se resulve con la respuesta asociada con la primera solicitud coincidente en el objeto almacenado.
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		cache.match("index.html").then(res =>{
+			console.log(res) // nos devuelve un resultado
+	})
+
+-Cache.matchAll(request,options): Devuelve un Promise que se resuelve en una matriz de todas las solicitudes coincidentes en el objeto almacenado.
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		cache.matchAll("index.html"); // Nos devuelve un resultado.	})
+
+-Cache.put(request, response): Toma tanto una solicitud como su respuesta y la agrega a la cahe dada.
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		fetch("index.html").then(res=>{
+			cache.put("index.html",res); //es lo mismo que usar cache.add
+		})
+
+-Cache.delete(request, options): Encuentra la entrada del objeto cuya clave es la solicitud, devolviendo un Promise que resuelve true si el objeto se encuentra y se elimina una entrada coincidente. Si no se encuentra ninguna entrada, la promesa se resuelve en false.( elimina recursos).
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		cache.delete("index.html"); // Elimina recursos.	})
+
+-Cache.keys(request, options): Devuelve un Promise que se resuelve en una matriz de keys de los objetos almacenados.
+
+	caches.open("archivos-estaticos").then(cache =>{ //abrimos un cache con nombre "archivos-estaticos".
+		cache.keys().then(res=>{
+			console.log(res); // Nos devuelve los keys.es decir nos devuelve toda la data del cache.
+		})
+
+----------------------------

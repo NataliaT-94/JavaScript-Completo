@@ -1,0 +1,247 @@
+Var: Son informacion que guardamos en memoria.
+
+TIpos de variables: String ("cadena de texto"), number(numeros), Boolean(true, false).
+
+Forma para declarar la variable:
+Var: Tiene un alcanse global.
+	var numero = 29;
+	var numero;  (Declarar)
+	numero = 29; (Inicializar)
+	
+let: Limita el alcanse de la variable a el bloque en el cual la ejecutamos.
+	let numero = 29;
+	let numbero; (Declarar)
+	numero = 29; (Inicializar)
+
+const: Es una variable constante, no puede cambiar su valor.
+	const nombre = "Natalia"; (Declarar y Inicializar al mismo tiempo)
+
+Undefine:  La variable esta declarada pero no esta inicializada.
+null: el valor esta vacia, no define nada, esta declarado intencionalmente.
+nan: Es un aviso de que el valor no es un numero.
+
+Mutiples Variables:
+Se definen mas de una variable a la vez.
+	let numero, numero2, numero3;
+	numero = 23;
+	numero2 = 13;
+	numero3 = 03;
+------
+Operadores Aritmeticos:
+Son los que toman valores numericos, y retornan un valor numerico.
+
+Operadores Asignacion:
+ asignacio x=y / x=y		desplazamiento a la izquierda x<<=y
+ adiccion  x+=y / x=x+y		desplazamiento a la derecha x>>=y
+ sustraccion x-=y / x=x-y	sin signo de desplazamiento a la derecha x>>>=y
+ multiplicacion x*=y / x=x*y	AND x^=y
+ division x/=y / x=x/y		XOR 
+ resto x%=y / x=x%y		OR x
+ exponenciacion x**=y / x=x**y
+
+Operadores de comparacion:
+Comparan dos expresiones y devuelven un valor Boolean (true o false) que representa la relacion de sus valores
+ equality (a == b)
+ inequality (a != b)
+ identifity (a === b)
+ non-identifity (a !== b)
+ greater than (a > b)
+ greate than or equal (a >= b)
+ less than (a < b)
+ less than or equal (a <= b)
+ 
+Operadores Logicos:
+Nos devuelven un resultado a partir de que se cumpla o no, una condicion, su resltado es bBooleano, y sus operandos son valoers logiocs o asimilables a ellos.
+ AND(&&) expr1 && expr2 -- Si las dos condiciones se cumplen es true
+ OR(||) expr1 || expr2 -- si al menos una de las condiciones se cumple es true
+ NOT (!) ! expr1 -- convierte el true en false y viseversa.
+ ------------------------------
+
+parseInt();  convierte el texto a numero
+
+-------------------------------------------
+Array: Contenedores de elementos
+
+let array = [elemento1,elemeto2,elemento3];
+let frutas = ["banana","manzana","pera"];
+
+document.write(frutas);
+
+Array asociativo : Contenedores de 
+
+let pc = {
+	nombre: "NattPC",
+	procesador: "Intel Core I7",
+	ram: "16GB",
+	espacio: "1TB"
+};
+document.write(pc["nombre"]);
+
+--------------------------------------------
+
+bucles e iteraciones
+
+while: es como el if pero se repite siempre.
+
+let numero = 0;
+
+while (numero <= 6){
+	numero++;
+	document.write(numero);
+}
+
+do while: primero se ejecuta y luego se pregunta.
+
+do{
+	document.write(numero);
+	numero++;
+}
+while (numero <= 6);
+
+break: hace que el bucle while finaize, que no se siga repitiendo.
+
+ while (numero <= 1000){
+	numero++;
+	document.write(numero);
+	if (numero == 10){ (se detiene en el numero 10 no llega al numero 1000.)
+		braek;
+	}
+ }
+
+------
+for: es un bucle que se repite una cantidad determinada de veces.
+
+ for (declaracion e inicializacion; condicion; incremento o decremento){
+ }
+
+ for( let i = 0; i<6 ; i++){
+	document.write(i);
+  }
+
+continue: se saltea esa iteracion.
+
+ for( let i = 1; i<=5 ; i++){
+	if(i==3){
+		continue; (se va a saltear el numero 3)
+	}
+	document.write(i);
+ } 
+
+
+for in: nos devuelve la posicion en la cual se encuentra.
+ 
+ let animales=["gato","perro","raton"];
+
+ for (animal in animales){
+	document.write(animal);  (marca: 012)
+}
+
+for of: nos devuelve el valor.
+
+  let animales=["gato","perro","raton"];
+
+ for (animal of animales){
+	document.write(animal);  (marca: gatp perro raton)
+}
+
+Label: es cuando se le da un nombre al bucle.
+
+---------
+
+Funciones:
+Es una porcion de codigo.
+
+ function nombre(parametros){
+	bucle
+}
+
+nombre(parametros);
+
+ function saludar(){
+	respueseta = prompt("¡Hola!¿Como estas?");
+	if(respuesta == "bien"{
+		alert("me alegro");
+	}else{
+		alert("una pena")
+	}
+}
+
+saludar();
+
+return: sirve para que nos devuelva un valor/ un tipo de dato.
+ function saludaar(){
+	alert("Hola");
+	return "La funcion se ejecuto correctamente";
+}
+let saludo = saludar();
+document.write(saludo);
+
+funciones flecha:
+
+const saludar  = (nombre)=>{
+}
+
+---------------------------------------------
+Programacion orientada a objetos(POO):
+-Clase: Crea objetos.
+-Atributo: Caracteristicas del objeto.
+-Metodo: Cosas que puede hacer el objeto. Se crean dentro de la classe
+-Constructor: Es una funcion obligatoria que debe hacer la clase.
+-Instanciacion: 
+
+class animal{
+	constructor(especie,edad,color){
+		this.especie = especie;
+		this.edad = edad;
+		this.color = color;
+		this.info = `Soy ${this.especie}, tengo ${this.edad} años y soy de color ${this.color}`;
+	}
+	verInfo(){
+		document.write(this.info)
+	}
+}
+const perro = new animal("perro",5,"rojo");
+const gato = new animal("gato",2,"azul");
+const pajaro = new animal("pajaro",1,"verde");
+
+perro.verInfo();
+gato.verInfo();
+pajaro.verInfo();
+
+Herencia/ extends:
+es un classe nueva que toma todo lo que pueda de la classe anterior y ademas le agrega cosas.
+
+class Perro extends Animal {
+	constructor(especie,edad,color,raza){
+		super(especie,edad, color);
+		this.raza =raza;
+	}
+	ladrar(){
+		alert("¡WAW!"),
+	}
+}
+const perro = new Perro("perro",5,"rojo","doberman";)
+
+perro.ladrar();
+ static:
+
+getter: son para obtener un valor.
+setter: son para modificar o definir un valor.
+ 	
+class Perro extends Animal {
+	constructor(especie,edad,color,raza){
+		super(especie,edad, color);
+		this.raza =null;
+	}
+	set setRaza(newName){
+		this.raz = newName;
+	}
+	get getRaza(){
+		return this.raza;
+	}
+}
+const perro = new Perro("perro",5,"rojo","doberman";)
+
+perro.setRazar = "Pedro";
+
+document.write(perro.getRaza);

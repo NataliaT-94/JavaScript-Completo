@@ -1,0 +1,101 @@
+Metodos de Cadenas:
+
+
+concat():Junta dos o mas cadenas y retorna una nueva.
+
+	let cadena = "cadena de prueba",
+	resultado = cadena.concat("Hola");
+	
+	document.write(resultado);
+
+
+startsWith():Si una cadena comienza con los caracteres de otra cadena, devuelve true, sino devuelve false.
+
+	let cadena = "cadena de prueba";
+	let cadena2 = "cadena de letras";
+	resultado = cadena.startsWith(cadena2);
+	
+	document.write(resultado);
+
+	marca TRUE porq amdas empiezan con la misma palabra.
+
+endsWith():Si una cadena termina con los caracteres de otra cadena, devuelve true, sino devuelve false.
+
+	let cadena = "cadena de prueba";
+	let cadena2 = "cadena de letras";
+	resultado = cadena.endsWith(cadena2);
+	
+	document.write(resultado);
+
+	marca FALSE porq terminan con diferentes palabras.
+
+includes():Si una cadena puede encontrarse dentro de otra cadena, devuelve true, sino devuelve false.
+
+	let cadena = "cadena de prueba";
+	let cadena2 = "cadena ";
+	resultado = cadena.endsWith(cadena2);
+	
+	document.write(resultado);
+
+	marca TRUE porq se encuentra esa misma cadena entro de cadena1.
+
+indexOf():Devuelve el indice/ posicion del primer caracter de la cadena, si no existe, devuelve -1.
+
+	let cadena = "cadena de prueba";
+	let cadena2 = "";
+	resultado = cadena.indexOf("de"); (marca 7 porq el caracter "de" comienza en la posicion 7.)
+	resultado = cadena.indexOf(cadena[7]); (marca "d" porq el caracter "de" comienza en la posicion 7.)
+
+	
+	document.write(resultado); 
+
+
+lastIndexOf():Devuelve el ultimo indice del primer caracter de la cadena, si no existe, devuelve -1.
+
+	let cadena = "cadena de prueba";
+	let cadena2 = "";
+	resultado = cadena.lastIndexOf("de"); (marca 8 porq el caracter "de" termina en la posicion 8.)
+	resultado = cadena.lastIndexOf(cadena[7]); (marca "e" porq el caracter "de" termina en la posicion 7.)
+
+	
+	document.write(resultado); 
+
+---
+padStart():[propuesta de estandar] Rellenar cadena al orincipio con los caracteres deseados.
+
+	let cadena = "abc";
+	let cadena2 = "";
+	resultado = cadena.padStart(6,"1"); (marca 111abc porq rellena de "1" hasta que tenga 6 caracteres.)
+
+	document.write(resultado); 
+
+padEnd()[propuesta de ECMA] Rellenar cadena al final con los caracteres deseados.
+
+	let cadena = "abc";
+	let cadena2 = "";
+	resultado = cadena.padStart(6,"1"); (marca abc111 porq rellena de "1" hasta que tenga 6 caracteres.)
+
+	document.write(resultado); 
+
+
+repeat() Devuelve la misma cadena pero repetida la cantidad que le indiquemos
+
+	let cadena = "abc";
+	let cadena2 = "";
+	resultado = cadena.padStart(6,"1"); (marca abc111 porq rellena de "1" hasta que tenga 6 caracteres.)
+
+	document.write(resultado); 
+ 
+
+---
+split() Divide la cadena como le pidamos.
+
+substring() Nos retorna un pedazo de la cena que seleccionamos.
+
+toLowerCase() Convierte una cadena a minuscula.
+
+toUpperCase() convierte una cadena a mayuscula.
+
+toString() Metodo devuelve una cadena que representa al objeto especificado.
+
+trim() Elimina los espacios en blanco al principio y al final de una cadena.

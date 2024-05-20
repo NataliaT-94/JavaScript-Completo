@@ -1,0 +1,182 @@
+"use strict": 
+-Se tienen de definir las variables para poder asignarles un valor (const, let, var).
+-Modificar propiedades (defineProperty() y writeable).
+-Agregar propiedades.
+-No se puede agregar propiedades a un string.
+-No se existen las multiples variables de una funcion.
+-Delete en objetos o variables.
+-Las palabras reservadas no pueden ser usadas como variables.
+-Cambi el this.
+-Numeros Octales con una "o" adelante y no existe with.
+-Arguments y Eval no pueden ser variables.
+
+writeable: es una propedad que hace que los valores no se puedad reescribir.
+	"usse strict";
+	const obj = {};
+	Object.defineProperty(obj,'nombre',{value:"pedro", writeable:false});
+	
+	console.log(obj.nombre);
+
+preventExtensions: EStamos prohibiendo que se definan nuevas propiedades.
+
+delete: sirve para eliminar unicamente propiedades de objetos.
+	"usse strict";
+	const obj = {
+		nombre:"lucas"
+	};
+	delete obj.nombre
+	
+	console.log(obj.nombre);
+
+---------------------------
+
+Funciones Flecha:
+-Por que aparecieron? (Funciones compactas y el uso de this).
+	const saludar = ()=>{
+		console.log("Hola");
+		console.log("Como eswtqas?");
+	}
+	saludar();
+-Si solo hay una expresion, la retornan.
+	const saludar= ()=> "string";
+	resultado = saludar();
+	console.log(resultado);
+
+- Parentesis opcionales ante un solo parametro (sin parametros se requiere parentesis).
+	const saludar= res => nombre = res;
+	resultado = saludar("Hola");
+	console.log(resultado);
+
+-No son adecuadas para ser usadas como metodos y no pueden ser usadas como constructores.
+-Retornan literales si su cuerpo esta entre ().
+-This Contextual (No tienen propio this, sino que toman el de la funcion que lo envuelve): Hace referencia al objeto que esta llamando a la funcion, que esta llamando al objeto.
+	this.nombre = "Ramirez";
+	const objeto = {
+		nombre: "Lucas",
+		saludar
+	}
+	objeto.saludar();
+
+///////////
+	
+	function saludar(){
+		console.log(`Hola ${this.nombre}`);
+	}
+	objeto.saludar();
+
+-Las reglas de modo estricto apllicadas this, son ignoradas.
+-Funcion flecha invocada a traves de los metodos call, apply y bind.
+-No tienen objeto Arguments.
+-No tienen propiedad del prototipo prototype.
+-No se puede usar Yield (por ende no se puede usar como funciones generadoras).
+-No puede contener saltos de linea entre sus parametros y su flecha.
+-orden de parseo. 
+
+---------------------
+-Funciones recursivas(Recursividad): Es cuando una funcion se llama a si misma.
+	saludar = ()=>{
+		saludar();
+	}
+///////////
+
+	const validarEdad = (msg)=>{
+		let edad;
+		try{
+			if(msg) edad = prompt(msg);
+			else edad = promp("introduce tu edad");
+			edad = parseInt(edad);
+			if(isNAN(edad)) throw "introc¿duce uin numero para la edad");
+			if(edad > 18) console.log("sos mayor de edad");
+			else console.log("sos menor de edad");
+		}catch(e){
+			validarEdad(e)
+		}
+	}
+	validarEdad();
+
+-Clausuras (o cierres): Son funciones que retornan otras funciones.
+	const saludar = (nombre)=>{
+		return function(){
+			console.log("Hola "+ nombre);
+		}
+	}
+	let saludo = saludar("pedro");
+	addEventListener("load", saludo);
+
+////////////////
+
+	const cambiarTamaño = tamaño =>{
+		return()=>{
+			document.querySelector(".text").style.fontSize = `${tamaño}px`;
+		}
+	}
+	px12 = cambiarTamaño(12);
+	px14 = cambiarTamaño(14);
+	px16 = cambiarTamaño(16);
+
+	document.querySelector(".t12").addEventListener("click"),px12);
+	document.querySelector(".t14").addEventListener("click"),px14);
+	document.querySelector(".t16").addEventListener("click"),px16);
+
+-parametros por defecto (validacion antigua vs actual).
+	const suma = (a = 0,b = 0)=>{
+		console.log(a+b);
+	}
+	suma(12,23);
+
+-Parametros rest(...paran): Es un array, si quieren agregar mas parametros hay que colocar los delante del rest.
+	const sume =(frase, ...num)=>{
+		let resltado =0;
+		for(let i=0; i<num.length; i++){
+			resultado += num[i];
+		}
+		console.log(`${frase}${resultado}`);
+	}
+	suma("pedro",12,25,62);
+
+-Destructuracion.
+-Destructurar Arrays y objetos.
+-Funion destructuradora.
+
+------------------------
+
+Operador Condicional(Ternario)
+-Definicion.
+-Sintaxis.
+	let edad = 25;
+	(edad > 18) ? console.log("Es mayor de edad")// lo que esta despues del ? es lo que sucede si es verdad.
+		    : console.log("Es menor de edad")// lo que esta despues del : es lo que sucede si NO es verdad.
+
+--------------------------
+
+Operador Spread (spread operator): convierte un array en tres valores diferentes.
+
+
+	let arr = ["valor 1","valor 2", "valor 3"];
+	console.log(...arr);
+
+-Añadir arrays a otros arrays.
+	let arr = ["manzana","pera","banana"];
+	let arr2 = ["kiwi","naranja"];
+
+	arr.push(...arr2);
+	console.log(arr);
+
+-Concatenar arrays.
+	let arr = ["manzana","pera","banana"];
+	let arr2 = ["kiwi","naranja"];
+
+	let arr3 = [...arr,...arr2];		
+	console.log(arr3);
+
+
+-Como argumento rest
+	const sumar = (num1,num2)=>{
+		console.log(num1 + num2)
+	}
+	let arr =[3,6];
+	sumar(...arr);
+
+--------------------
+
+ 

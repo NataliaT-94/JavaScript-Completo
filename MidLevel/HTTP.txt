@@ -1,0 +1,40 @@
+Peticiones HTTP
+
+-Definicion: Es una peticion de informacion que nosotros le hacemos a un servidor, y el servidor nos devuelve una data.
+
+-Cliente & servidor: El cliente somos nosotros y el servidor es quien procesa toda la informacion.
+
+-No guardan inoformacio.
+
+-------------------
+
+json: Son datos estructurados.
+
+-Definicion, usos y sintaxis. 
+	const objeto ={
+		"variable1": "Jorge", // cuando las variables esstan entre "" eso es un JSON, facilitan el envio de informacion hacia un servidor.
+		"variable2": "Roberto"
+	};
+	console.log(objeto.variable1);
+
+-Serializacion: Es cuando un Json es una cadena de texto.
+	const objeto ='{"variable1": "Jorge","variable2": "Roberto"}';
+
+ -Deserializacion.
+	const objeto ={"variable1": "Jorge","variable2": "Roberto"};
+
+
+-Metodo parse() - Convierte un string con estructura de JSON a Formato JSON (deserializar).
+	const serializar = '{"variable1": "Jorge","variable2": "Roberto"}';
+
+	const deserializado = JSON.parse(serializar);
+	console.log(typeof deserializado);
+
+-Metodo stringify() - Convierte un dato de JavaScript en una caena de texto JSON(serializar).
+	const deserializar = {"variable1": "Jorge","variable2": "Roberto"};
+
+	const serializar = JSON.stringify(deserializado);
+	console.log(typeof serializado);
+
+-JSON PolyFill - https://developer.mozilla.org/en-US/docs/web/JavaScript/Reference/Global_Objects/JSON/parse:
+Es una funcion que simula un JSON.
