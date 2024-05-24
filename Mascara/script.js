@@ -14,7 +14,7 @@ let cvvNumber = [];
 inputCard.addEventListener("keydown", (e)=>{
     if(e.key === "Tab"){
         return;
-    }
+    }// si presionamos la tecla tab, se corre de input.
 
     e.preventDefault();
     handleInput(maskNumber, e.key, cardNumber);
