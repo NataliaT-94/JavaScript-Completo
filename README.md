@@ -43,6 +43,6 @@ en mi caso se encuentra de esta manera
 * Ejecutar live server del complemento "Live Server v5.7.9" de Ritwick Dey
 
 ctrl + P -> Live server: open with live server
-ctrl + P -> vs browser: star browser
+ctrl + P -> vs browser: start browser
 
 una vez que el live server dispare el navegador, copiar el link del chrome y pegarlo en el navegador de VS
