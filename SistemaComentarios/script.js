@@ -90,5 +90,4 @@ function renderComments(arr, parent){
          
     });
 
-    console.log(comments);
 }
