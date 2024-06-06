@@ -1,5 +1,6 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background: #FFE4C4;
 }
 
 .input{
@@ -10,6 +11,7 @@ body{
     display: flex;
     align-items: center;
     outline: none;
+    
 }
 
 .input-tag-container{
@@ -18,6 +20,13 @@ body{
     width: 500px;
     flex-wrap: wrap;
     border: solid 1px #ccc;
+    background-color: #F0FFFF;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
 .tag-container{
@@ -28,7 +37,7 @@ body{
 
 .tag-item{
     border: solid 1px #ccc;
-    background-color: #eee;
+    background-color: #FFFFE0;
     display: flex;
     border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -36,6 +45,8 @@ body{
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     align-items: center;
+    padding: 5px ;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
 }
 
 .tag-item button{
@@ -54,5 +65,5 @@ body{
 }
 
 .tag-item button:hover{
-    background-color: #ccc;
+    background-color: #FFE4B5;
 }
