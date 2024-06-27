@@ -46,3 +46,11 @@ ctrl + P -> Live server: open with live server
 ctrl + P -> vs browser: start browser
 
 una vez que el live server dispare el navegador, copiar el link del chrome y pegarlo en el navegador de VS
+
+############################################################
+
+abrir el localhost
+
+http://localhost/GitHub/JavaScript-Completo/Teoria/async-recorrer%20Json/index.html
+
+#############################################################

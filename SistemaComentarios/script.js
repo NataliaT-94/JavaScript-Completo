@@ -30,7 +30,7 @@ function handleEnter(e, current){ //e:se refiere al evento q estamos usando / cu
         commentsContainer.innerHTML = '';// limpiamos todo el interfas
         commentsContainer.appendChild(inputContainer);
 
-        renderComments(comments, commentsContainer);//los parametros con el arreglo que estamos utilizando y el padre del arreglo
+        renderComments(comments, commentsContainer);//los parametros son el arreglo que estamos utilizando y el padre del arreglo
     }
 }
 
