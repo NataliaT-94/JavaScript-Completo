@@ -54,3 +54,15 @@ abrir el localhost
 http://localhost/GitHub/JavaScript-Completo/Teoria/async-recorrer%20Json/index.html
 
 #############################################################
+
+*iconos para el tittle de la pagina
+
+https://www.flaticon.es/iconos-gratis/calculadora
+
+##############################################################
+
+utilizar distintos iconos
+
+<!--<script src="https://kit.fontawesome.com/5cc0edbc72.js" crossorigin="anonymous"></script>-->
+
+##############################################################
