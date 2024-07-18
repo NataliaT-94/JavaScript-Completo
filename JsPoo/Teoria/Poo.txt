@@ -1,0 +1,32 @@
+                    Programacion orientada a objetos(POO)
+
+Terminologia del POO
+-Objetos: Son la pieza central de la POO. Los objetos se componen de datos(propiedades) y metodos(funciones) que operan sobre esos datos
+-Propiedad: Es un dato que representa una caracteristica de un objeto. Una propiedad es una variable. Un objeto puede tener muchas propiedades.
+-Metodo: Es una funcion que puede ejecutar nuestro objeto. Un objeto puede tener muchos metodos.
+-Clase: Son plantillas que son utilizadas para instanciar(crear) objetos. Una clase encapsula(contiene) todas las propiedades y metodos que despues almacenaren los objetos instanciados. Representa a un tipo de objeto; ej: Libro,Automovil,Perro.
+-Constructor: Es un metodo que se llama en el momento de la creacion de instancias(objetos). Los constructores son utiles para construir o inicializar las propiedades de los objetos.
+-Getter: Es un metodo que permite aceder a una propiedad de un objeto en lugar de usar la propiedad directamente.
+-Setter: Es n metodo que permite acceder y modificar una propiedad privada de un objeto en lugar de modificar la propiedad directamente.
+
+
+
+Pilares de la POO
+
+-Abstraccion:
+    Abstraer, es eliminar los detalles innecesarios para solo nos enfocamos en los aspectos que son necesarios para el contexto o sistema que estamos desarrollando.
+
+Ej: Si sos empleado y estudiante al mismo tiempo de una facultad, el sistema de trabajo solo va a necesitar los datos de trabajo, numero de empleado, puesto y sueldo. En cambio el sistema de la escuela solo le interesa los datos como alumno, como numero de matricula, grado y calificaciones.
+
+-Encapsulacion:
+    Se centra en ocultar los detalles que no son relevvantes para el exterior. Es la agupacion de datos(propiedades) y los metodos que actuan sobre esas propiedades de manera que el acceso a esos datos esta restringido desde fuera del paquete(clase). En POO, esto significa que un objeto almacena su estado de forma privada, y solo los metodos del objeto tienen acceso para cambiarlo
+
+Ej:
+
+-Herencia:
+    Es la forma en la que una clase(hija) hereda de otra clase(padre) sus metodos y atributos. La herencia permite la reutilizacion de codigo de una clase en otra y es ideal implementarla cuando los objetos tienen similitudes entre si.
+
+Ej:
+
+-Polimorfismo: 
+    Se refiere a la capacidad de realizar una misma accion en diferenters formas
