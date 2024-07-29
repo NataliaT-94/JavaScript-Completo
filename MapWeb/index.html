@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Web</title>
+    <link rel="stylesheet" href="src/leaflet.css">
+    <link rel="stylesheet" href="src/plugins/L.Control.Pan.css">
+    <link rel="stylesheet" href="src/plugins/L.Control.Zoomslider.css">
+    <link rel="stylesheet" href="src/plugins/L.Control.MousePosition.css">
+    <link rel="stylesheet" href="src/plugins/Leaflet.PolylineMeasure.css">
+    <link rel="stylesheet" href="src/css/bootstrap.css">
+    <script src="src/leaflet-src.js"></script>
+    <script src="src/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #mapdiv{
+            height: 100vh;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="side-bar" class="col-md-3">
+                <button id="btnLocate" class="btn btn-primary w-100 m-1">Localizar</button>
+                <button id="btnZocalo" class="btn btn-primary w-100 m-1">Zoom Calles</button>
+                <h5>Nivel de Zoom: <span id="zoom-level"></span></h5>
+                <h5>Centro del Mapa: <span id="map-center"></span></h5>
+                <h5>Localizacion del Mouse: <span id="mouse-location"></span></h5>
+            </div><!--la barra ocupara 3 columnas-->
+            <div id="mapdiv" class="col-md-9"></div><!--el mapa ocupara 9 columnas-->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="src/plugins/L.Control.Pan.js"></script>
+    <script src="src/plugins/L.Control.Zoomslider.js"></script>
+    <script src="src/plugins/L.Control.MousePosition.js"></script>
+    <script src="src/plugins/Leaflet.PolylineMeasure.js"></script>
+</body>
+</html>
