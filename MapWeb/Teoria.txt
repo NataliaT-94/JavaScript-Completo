@@ -1,0 +1,432 @@
+(4)-CAPAS VECTORIALES EN LEAFLET
+
+Leaflet.Draw
+
+Constructor
+    -ctlDraw = new L.Control.Draw(option)
+
+Events
+    -draw: drawstar,
+    draw: drawstop,
+    draw: created
+
+    -draw: editstart,
+    draw: editstop,
+    draw: edited
+
+
+    -draw: deletestart,
+    draw: deletestop,
+    draw: deleted
+
+Options
+-Draw
+    *marker
+        icon
+    *Polyline
+        shapeOptions,metric
+    *Polygon
+        ShapeArea,shapeOptions,metric
+    *rectangle
+    *circle
+-edit
+    *featureGroup
+    *remove
+--------------------------------------------------------------------
+GeoJson
+
+-Una especificación para crear, identificar y almacenar datos geoespaciales en notación de objetos javaScript.
+-API de mapeo
+    *Leaflet
+    *Google
+    *OpenLayers
+    *ESRI????
+
+-Otros software
+    *QGIS
+    *PostGIS
+    *Turf.js
+    *PHP
+    *Base de datos
+
+-----------
+GeoJson-Point
+
+{   type: Point,
+    coodinates: [-108.5, 33.7]
+}
+
+coordinates[0] = -108.5
+coodinates[1] = 33.7
+--
+
+{   type: MultiPoint,
+    coodinates : [[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]]
+}
+
+coordinates[1][0] = -108.4
+coodinates[0][1] = 33.7
+coodinates[2,0] = -108.6
+coodinates[0,2] = no existe un 3 punto en la primera coordenada
+
+-----------
+GeoJson-Line
+
+{   type: LineString,
+    coodinates: [[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]]
+}
+
+--
+
+{   type: MultiLineString,
+    coodinates : [[[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]],
+    [[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]],[[-108.5, 33.7],
+     [-108.4, 33.5], [-108.6, 33.2]]]
+}
+-----------
+GeoJson-Polygon
+
+{   type: Polygon,
+    coodinates: [[[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]],
+    [[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]],[[-108.5, 33.7],
+     [-108.4, 33.5], [-108.6, 33.2]]]
+}
+
+--
+
+{   type: MultiPolygon,
+    coodinates : [[[[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]],
+    [[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2]],[[-108.5, 33.7],
+     [-108.4, 33.5], [-108.6, 33.2]]],
+     [[-108.5, 33.7], [-108.4, 33.5], [-108.6, 33.2], [-108.5, 33.7]]]
+
+}
+
+-----------
+GeoJson-Features and FeatureCollections
+
+{   type: feature,
+    geometry: { type: Point,
+                coordinates: [-108.5, 33.7]
+    },
+    properties: {   species: Bald Eagle,
+                    sex: male,
+                    age: 7
+    }
+}
+--
+
+{   type: FeatureCollections,
+    feature: [{ type: feature,
+                geometry: { type: Point,
+                coordinates: [-108.5, 33.7]
+                },
+                properties: {   species: Águila calva,
+                                sex: macho,
+                                age: 7
+                }
+            },{ type: feature,
+                geometry: { type: Point,
+                coordinates: [-109.1, 32.5]
+                },
+                properties: {   species: Águila dorada,
+                                sex: hembra,
+                                age: 2
+                }
+    }]
+    
+}
+----
+
+-Permitir propiedades (atributos)
+
+-Extiende el grupo de funciones
+
+-Constructor
+    *let lyrGeoJSON = L.geoJSON(object, {Options});
+
+-Métodos
+    *addData()
+    *setStyle()
+    *resetStyle()
+
+-Options
+    *pointToLayer
+        +devolver un marcador para geometrías de puntos
+    *style - Opciones de ruta
+        +Puede ser un objeto de opción de estilo, una función que devuelve uno.
+        +Útil para estilos específicos de atributos.
+    *onEachFeature - función que se ejecuta en cada característica
+        +útil para ventanas emergentes de atributos específicos
+    *filter - función que determina si se incluirá la característica
+        +devuelve verdadero si está incluido
+-----------
+GeoJson- ¿De dónde viene?
+
+-Codificada
+    *Escriba los litorales de objetos que formarán GeoJSON válido
+-Desde un archivo de texto
+    *Leaflet.Ajax - plug-in que lee un archivo en el servidor
+    *Leaflet.FileLayer - plug-in que permite cargar datos desde el sistema de archivos del cliente
+
+*Los archivos de formas, las capas de bases de datos geográficas y otros formatos se pueden convertir a archivos GeoJSON.
+-De una base de datos
+    *Utilice lenguajes del lado del servidor para leer datos de una base de datos y convertirlos a texto GeoJSON.
+    *GeoJSON se puede almacenar directamente en una base de datos
+
+-----------
+Otras fuentes de datos vectoriales
+
+-Leaflet-omnivore
+    *plug-in para cargar datos GPX, KML, CSV, WKT, TopoJSON
+
+-Leaflet.Shapefile y Leaflet.FileGDB
+    *Cargar datos de ESRI directamente
+
+-Leaflet ESRI
+    *Leer los servicios del servidor ArcGIS
+
+-Leaflet-WFST
+    *Leer datos servidos como un servicio de función WEB transaccional
+
+-Leaflet-GeopPackage
+    * Almacene datos vectoriales y mosaicos de imágenes en un único archivo basado en SQLlite
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+(5)-APLICACION DE ESTILOS A LOS DATOS VECTORIALES
+
+#Estilos de marcadoresnativos de Leaflet
+
+-L.Marker
+
+-L.CircleMarker
+    *Opciones de ruta para límites y rellenos+
+    *Radio en píxeles
+
+-L.Circle
+    *Opciones de ruta para límites y rellenos+
+    *Radio en metros
+    *Uso para mostrar buffers
+
+            ++Opciones de ruta++
+                *color
+                *weight
+                *opacity
+                *dashArray
+                    <line stroke-dasharray= "5, 5" - - - - - - - - 
+                    <line stroke-dasharray= "5, 10" -  -  -  -  -  -  -
+                    <line stroke-dasharray= "10, 5" -- -- -- -- -- -- --
+                    <line stroke-dasharray= "1, 5" . . . . . . . . . . . 
+                    <line stroke-dasharray= "15, 10, 5" ---  -  -- --- -  -- --- - --
+                    <line stroke-dasharray= "15, 10, 5, 10" --- - ---  -- --  --- - ---
+                    <line stroke-dasharray= "5, 5, 1, 5" _ . _ . _ . _ . _ . _ . _ . _
+                *fillColor
+                *fillOpacity
+
+-----------
+#Plug-in de estilosde marcadores de Leaflet
+
+Styling piont - plugins
+
+-Javascript Based
+    *Leaflet.sprite.js
+        +Rojo, Naranja, Amarillo, verde, azul, violeta, purpura
+    
+    *Font Based
+        +Fonts
+            *Boostrap Glyphicon
+            *Font Awesome
+            *MapKeyIcons
+        +Plug-ins
+            *Lawesome-Markers
+            *L.BeautifyMarkers
+            *Leaflet-mapkey-icon
+
+-----------
+#Marcadores personalizados
+
+Iconos personalizados
+
+-Constructor
+    *let icnBear = L..Icon(options)
+
+-Opciones
+    *iconUrl:, iconRetinaUrl: camino a la imagen
+    *iconSize: [20,20]
+    *iconAnchor:[10,12]
+    *popupAnchor:[10,-6]
+    *shadowUrl, ShadowRetinaUrl
+    *shadowSize
+    *shadowAnchor
+-----------
+#Plugin markercluster
+
+Cluster Markers
+
+-Constructor
+    *let lyrMarkers = l.markerClusterGroup(options)
+
+-Options
+    *showCoverageOnHover
+    *zoomToBoundsOnClick
+    *spiderfyOnMaxZoom
+
+-Methods
+    *addLayer()
+    *removeLayer()
+    *clearLayers()
+
+-----------
+#Opciones nativas de leaflet para diseñar lineas ypoligonos
+
+Líneas de estilo y polígonos - nativo
+
+-style
+    *Opciones de ruta de regreso
+
+-onEachFeature
+    *Útil para agregar información sobre herramientas y ventanas emergentes
+
+-filter
+
+-----------
+#Opciones de plugins para aplicar estilos a lineas y poligonos
+
+styling lines and polygons - plugins
+
+-Leaflet.PolyLineDecorator
+-Leaflet.TextPath
+-Leaflet.LineExtremities
+-leaflet-distance-Markers
+-leaflet-corrridor
+-Leaflet.pattern
+-Leaflet-polygon-fillPattern
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+(6)-BUSQUEDA, FILTRADO Y ANALISIS DE DATOS EN LEAFLET
+
+#Introduccion y organizacion del codigo anterior
+
+Analisis parte 1 - Leaflet Metodos
+
+-Buscar
+    *Puro js
+
+-Filtrar
+    Leaflet.Ajax
+
+-Editar
+    *Leaflet.draw
+
+-Encontrar la característica más cercana
+    *L.GeomUtil
+
+-----------
+#Creacion de un cuadro de busqueda en Leaflet - HTML Y CSS
+
+Buscar - Buscar función por ID
+
+-HTML
+    *Enclosing div
+    *Label
+    *Error Message
+    *Form Group
+        +Text Box
+        +Search Button
+    *Data
+
+-CSS
+    *Booststrap Classes
+        +Columns
+        +Form constrols
+        +Buttons
+        +Error State
+
+<div id='divProject' class="col-xs-12">
+    <div id='divProjectLabel' class="text-center col-xs-12">
+        <h4> id=Linear Project</h4>ç
+    </div>
+    <div id='divProjectError' class="errorMsg col-xs-12"></div>
+    <div id='divFindProject' class="form-group">
+        <div class="col-xs-6">
+            <input type="text" id='textFindProject' class="form-control" placeholder="Project ID">
+        </div>
+        <div class="col-xs-6">
+            <button id='btnFindProject' class="btn btn-primary btn-block">Find Project</button>
+        </div>
+    </div>
+    <div id="divProjectData"></div>
+</div>
+
+-CSS (cont'd)
+    *Background color
+    *errorMsg class
+
+#divProject{
+    Background-color: beige;
+}
+
+.errorMsg{
+    padding:0;
+    text-aling: center;
+    Background-color: red;
+}
+
+-----------
+#Creacion de un cuadro de busqueda en Leaflet - JS
+
+Buscar - Buscar función por ID
+
+-JavaScript
+    *Declarar una función
+    *Obtener variedad de capas
+    * Recorre todas las capas.
+        +Comparar el ID del proyecto de la característica con el parámetro pasado a la función
+        +Función de devolución si coinciden
+    *Devuelve falso si no se encuentra ninguna coincidencia
+
+function returnProjectByID(id){
+    let arLayers = lyrClientLines.getLayers();
+    for(i=0; i<arLayers.length-1; i++){
+        let featureID = arLayers[i].feature.properties.Property;
+        if(featureID == id){
+            return arLayers[i];
+        }
+    }
+    return false;
+}
+
+
+    *Manejar evento de clic del botón de búsqueda
+    *Recuperar identificación del cuadro de texto
+    *Pásalo al returnProjectByID
+    *si se encuentra
+        +Agregar función a la capa del grupo de búsqueda
+        +Acercar a la capa
+        +Rellenar la barra lateral con datos
+    *De lo contrario informar un error
+
+
+$("#btnFindProject").click(function(){
+    let id = $("#textFindProject").val();
+    let lyr = returnClientlinebyID(id);
+    if(lyr){
+        if(lyrSearch){
+            lyrSearch.remove();
+        }
+        lyrSearch = L.geoJSON(lyr.toGeoJSON(),{
+            style:{color:'red',
+                    weight: 10,
+                    opacity: 0.5
+                }
+            }).addTo(mymap);
+        mymap.fitBounds(lyr.getBounds().pad(i));
+        let att = lyr.feature.properties;
+        $("#divProjectData").html("<h4 class='text-center'>Attributes</h4><h5>Type: "+ att.type +"</h5><h5>ROW Width: "+ att.row_width +" m</h5>");
+    } else {
+        $("#divProjectError").html("**** Project ID not found ****");
+    }
+})
