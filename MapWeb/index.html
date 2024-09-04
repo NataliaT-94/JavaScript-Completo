@@ -17,13 +17,15 @@
     <link rel="stylesheet" href="src/plugins/leaflet-mapkey/MapkeyIcons.css">
     <link rel="stylesheet" href="src/plugins/MarkerCluster.css">
     <link rel="stylesheet" href="src/plugins/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="src/jquery-ui.min.css">
     <link rel="stylesheet" href="style.css">
+
     <style>
         #mapdiv{
             height: 100vh;
         }
-        .col-xs-12, .col-xs-6, .col-xs-4 {
-            padding: 3px;
+        .col-6, .col-4 {
+            padding: 2px;
         }
         #divProject{
             Background-color: beige;
@@ -34,6 +36,18 @@
             text-align: center;
             Background-color: red;
         }
+
+            
+        #divBUOWL {
+            background-color: #ffffb3;
+        }
+        #divEagle {
+            background-color: #ccffb3;
+        }
+            
+        #divRaptor {
+            background-color: #e6ffff;
+        }
     </style>
 
 </head>
@@ -42,24 +56,135 @@
         <div class="row">
             <div id="side-bar" class="col-md-3">
                 <button id="btnLocate" class="btn btn-primary w-100 m-1">Localizar</button>
-                <div id='divProject' class="col-xs-12">
-                    <div id='divProjectLabel' class="text-center col-xs-12">
-                        <h4>Linear Project</h4>
+                <div id='divProject' class="col-12 p-3">
+                    <div id='divProjectLabel' class="text-center col-12">
+                        <h4 id="lblProject">Proyecto lineal</h4>
                     </div>
-                    <div id='divProjectError' class="errorMsg col-12"></div>
-                    <div id='divFindProject' class="form-group">
+                    <div id='divProjectError' class="errorMsg col-12 p-1 m-1"></div>
+                    <div id='divFindProject' class="form-group has-error">
                         <div class="row">
                             <div class="col-6">
-                                <input type="text" id='textFindProject' class="form-control w-100" placeholder="Project ID">
+                                <input type="text" id='txtFindProject' class="form-control w-100" placeholder="Project ID">
                             </div>
                             <div class="col-6">
-                                <button id='btnFindProject' class="btn btn-primary  w-100">Find Project</button>
+                                <button id='btnFindProject' class="btn btn-primary  w-100" disabled>Buscar Proyecto</button>
                             </div>
                         </div>
+                        <div id="divFilterProject" class="col-12">
+                            <div class="row">
+                                <div class="col-4">
+                                    <input type="checkbox" name="fltProject" value="Pipeline">Pipeline<br>
+                                    <input type="checkbox" name="fltProject" value="Road">Access Roads
+                                    <button id="btnProjectFilterAll" class="btn btn-primary w-100">Check All</button>
+                                </div>
+                                <div class="col-4">
+                                    <input type="checkbox" name="fltProject" value="Electric">Electric lines<br>
+                                    <input type="checkbox" name="fltProject" value="Extraction">Extractions
+                                    <button id="btnProjectFilterNone" class="btn btn-primary w-100">Uncheck All</button>
+                                </div>
+                                <div class="col-4">
+                                    <input type="checkbox" name="fltProject" value="Flowlines">Flowlines<br>
+                                    <input type="checkbox" name="fltProject" value="Other">Other
+                                    <button id="btnProjectFilter" class="btn btn-primary w-100">Filter</button>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="" id="divProjectData"></div>
                     </div>
-                    <div id="divProjectData"></div>
+                    <div id="divBOWL" class="col-12">
+                        <h4 id="lblBUOWL">Hábitat de BUOWL</h4>
+                    </div>
+                    <div id="divBUOWLError" class="errorMsg col-12 p-1 m-1"></div>
+                    <div id="divFindBUOWL" class="form-group has-error">
+                    <div class="row">
+                            <div class="col-6">
+                                <input type="text" id="txtFindBUOWL" class="form-control w-100" placeholder="Habitat ID">
+                            </div>
+                            <div class="col-6">
+                                <button id="btnFindBUOWL" class="btn btn-primary w-100" disabled>Encontrar BUOWL</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divFilterBUOWL" class="col-12">
+                        <div class="row">
+                            <div class="col-2">
+                                <input type='radio' name='fltBUOWL' value='ALL' checked>Todos
+                            </div>
+                            <div class="col-5">
+                                <input type='radio' name='fltBUOWL' value='Yes'>Históricamente ocupada
+                            </div>
+                            <div class="col-5">
+                                <input type='radio' name='fltBUOWL' value='Undetermined'>Indeterminada
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="divBUOWLData"></div>
                 </div>
+                <div id="divEagle" class="col-12 p-3">
+                    <div id="divEagleLabel" class="text-center col-12">
+                        <h4 id="lblEagle">Nido de Aguila</h4>
+                    </div>
+                    <div id="divEagleError" class="errorMsg col-12 p-1 m-1"></div>
+                    <div id="divFindEagle" class="form-group has-error">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" id="txtFindEagle" class="form-control w-100" placeholder="Eagle Nest ID">
+                            </div>
+                            <div class="col-6">
+                                <button id="btnFindEagle" class="btn btn-primary w-100" disabled>Encuentra el nido del águila</button>
+                            </div>
+                        </div>    
+                    </div>
+                    <div id="divFilterEagle" class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type='radio' name='fltEagle' value='ALL' checked>Todos
+                            </div>
+                            <div class="col-4">
+                                <input type='radio' name='fltEagle' value='ACTIVE NEST'>Activo
+                            </div>
+                            <div class="col-4">
+                                <input type='radio' name='fltEagle' value='INACTIVE LOCATION'>Inactivo
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="divEagleData"></div>
+                </div>
+                <div id="divRaptor" class="col-12 p-3">
+                    <div id="divRaptorLabel" class="text-center col-12">
+                        <h4 id="lblRaptor">Nidos de aves rapaces</h4>
+                    </div>
+                    <div id="divRaptorError" class="errorMsg col-12 p-1 m-1"></div>
+                    <div id="divFindRaptor" class="form-group has-error">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" id="txtFindRaptor" class="form-control w-100" placeholder="Raptor Nest ID">
+                            </div>
+                            <div class="col-6">
+                                <button id="btnFindRaptor" class="btn btn-primary w-100" disabled>Encuentra el nido de rapaces</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divFilterRaptor" class="col-12">
+                        <div class="row">
+                            <div class="col-3">
+                                <input type='radio' name='fltRaptor' value='ALL' checked>Todos
+                            </div>
+                            <div class="col-3">
+                                <input type='radio' name='fltRaptor' value='ACTIVE NEST'>Activo
+                            </div>
+                            <div class="col-3">
+                                <input type='radio' name='fltRaptor' value='INACTIVE NEST'>Inactivo
+                            </div>
+                            <div class="col-3">
+                                <input type='radio' name='fltRaptor' value='FLEDGED NEST'>Plumado
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="" id="divRaptorData"></div>
+                </div>
+            </div>
 <!---
                 <button id="btnZocalo" class="btn btn-primary w-100 m-1">Zoom Calles</button>
                 <button id="btnYPF" class="btn btn-primary w-100 m-1">Zoom al YPF</button>
@@ -73,14 +198,14 @@
                 <!--<h5>Opacidad de la Imagen: <span id="image-opacity">0.5</span></h5>
                 <input type="range" id="sldOpacity" min="0" max="1" step="0.1" value="0.5">-->
             </div><!--la barra ocupara 3 columnas-->
-            <div id="mapdiv" class="col-md-12"></div><!--el mapa ocupara 12 columnas-->
+            <div id="mapdiv" class="col-12"></div><!--el mapa ocupara 12 columnas-->
         </div>
     </div>
     
     <script src="src/leaflet-src.js"></script>
     <script src="src/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
-    <script src="src/plugins/L.Control.Pan.js"></script>
+    <script src="src/plugins/L.Control.Pan.js"></script> 
     <script src="src/plugins/L.Control.Zoomslider.js"></script>
     <script src="src/plugins/L.Control.MousePosition.js"></script>
     <script src="src/plugins/L.Control.Sidebar.js"></script>
@@ -92,8 +217,8 @@
     <script src="src/plugins/leaflet.awesome-markers.min.js"></script>
     <script src="src/plugins/leaflet-mapkey/L.Icon.Mapkey.js"></script>
     <script src="src/plugins/leaflet.markercluster.js"></script>
-
-    
-
+    <script src="src/plugins/leaflet.geometryutil.js"></script>
+    <script src="src/jquery-ui.min.js"></script>
+    <script src="src/turf.min.js"></script>
 </body>
-</html>
+</html> 

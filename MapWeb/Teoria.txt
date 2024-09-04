@@ -430,3 +430,226 @@ $("#btnFindProject").click(function(){
         $("#divProjectError").html("**** Project ID not found ****");
     }
 })
+
+-----------
+#Creacion de un cuadro de busqueda en Leaflet: Autocompletar parte 1
+
+-Requiere biblioteca JQuery UI
+
+-----------
+#Generalizacion de funciones
+
+function return ClientLineByID(id){                            | function return LayerByAttribute(ly,att,val){
+    var arLayers = lyrClientLines.getLayers();                 |      var arLayers = lyr.getLayers();
+    for(i=0; i<arLayers.length; i++){                          |     for(i=0; i<arLayers.length; i++){}
+       var featureID = arLayers[i].feature.properties.Project; |         var featureID = arLayers[i].feature.properties.Project;
+        if(featureID == id){                                   |         if(featureID == id){
+            return arLayers[i];                                |             return arLayers[i];
+        }                                                      |         }
+    }                                                          |     }
+}                                                              |   }   
+        
+-----------
+#Filtrado de datos: Casillas de verificacion
+
+-HTML
+    <div id="divEagleFilter" class="col-xs-12">
+        <div class ="col-xs.4">
+            <input type="radio" name="fltEagle" value="ALL" checked>All
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="fltEagle" value="ACTIVE NEST">Active
+        </div>
+        <div class="col-xs-4">
+            <input type="radio" name="fltEagle" value="INACTIVE LOCATION">Inactive
+        </div>
+    </div>
+
+-JavaScript
+
+$('input[name=fltEagle]').click(function(){
+    arEagleIDs = [];
+    lyrEagle
+    nesys.refresh();
+});
+
+function filterEagle(json){
+    let att = json.properties;
+    let optEagle = $("input[name = 'fltEagle']:checked").val();
+
+    if(optEagle == 'ALL'){
+        return true;
+    } else {
+        return (att.status == optEagle);
+    }
+}
+
+    *
+Establezca las funciones de filtro Eagles como la opción de filtro del método constructor GeoJSON
+    
+-----------
+#Filtrado de datos: Check boxes
+
+-HTML
+
+<div id="divFilterProject" class="col-xs-12">
+    <div class="col-xs-4">
+        <input type="checkbox" name="fltProject" value="Pipeline" checked>Pipelines<br>
+        <input type="checkbox" name="fltProject" value="Road" checked>Access Roads
+        <button id="btnProjectFilterAll" class='btn btn-primary w-100 btn-sm'>Check All</button>
+    </div>
+    <div class="col-xs-4">
+        <input type="checkbox" name="fltProject" value="Electric" checked>Electric Lines<br>
+        <input type="checkbox" name="fltProject" value="Extraction" checked>Extractions
+        <button id="btnProjectFilterNone" class='btn btn-primary w-100 btn-sm'>Uncheck All</button>
+    </div>
+    <div class="col-xs-4">
+        <input type="checkbox" name="fltProject" value="Flowline" checked>Flowline<br>
+        <input type="checkbox" name="fltProject" value="Other" checked>Other
+        <button id="btnProjectFilter" class='btn btn-primary w-100 btn-sm'>Filter</button>
+    </div>
+</div>
+
+-JS
+
+$("#btnProjectFilter").click(function(){
+    arProjectIDs = [];
+    lyrClientLines.refresh();
+});
+
+$("#btnProjectFilterAll").click(function(){
+    $('input[name=fltproject]').prop('checked', true);
+});
+
+$("#btnProjectFilterNone").click(function(){
+    $('input[name=fltproject]').prop('checked', false);
+});
+
+
+
+function filterClientLines(json){
+    let arProjectFilter = [];
+    $("#input[name=fltProject]").each(function(){
+        if(this.checked){
+            arProjectFilter.push(this.value);
+        }
+    });
+
+    let att = json.properties;
+    switch (att.type){
+        case 'Pipeline':
+            return(arProjectFilter.indexOf('Pipeline') >= 0);
+            break;
+        case 'Flowline':
+            return(arProjectFilter.indexOf('Flowline') >= 0);
+            break;
+        case 'Flowline, est.':
+            return(arProjectFilter.indexOf('Flowline') >= 0);
+            break;
+        default:
+            return(arProjectFilter.indexOf('Other') >= 0);
+    }
+}
+
+-----------
+#Encontrar la característica más cercana
+
+-Leaflet plugins
+    - L.GeometryUtil
+        *bearing
+        *distance
+        *length
+        *closest
+        *closestLayer
+        *nClosestLayers
+        *layersWithin???
+
+    -L.GeometryUtil.closestLayer
+        *Inputs
+            +Map
+            +Array of layers
+            +LatLng
+        
+        *Output
+            +{layer, latlng, distance}
+
+        *arBUOWL = lyrBUOWL.getLayers()
+        *nearestBUOWL = L.GeometryUtil.closestLayer(mymap, arBUOWL, llReference)
+        *nearestBUOWL.layer
+        *nearestBUOWL.latlng
+        *nearestBUOWL.distance
+        *llReference.distanceTo(nearestBUOWL.latlng)
+
+
+Wrapping the closest layer method
+
+function returnClosestLayer(lyrgGroup, llRef){
+    let arLyr = lyrGroup.getLayers();
+    nearest = L.GeometryUtil.closestLayer(mymap, arLyr, llRef);
+    nearest.distance = llRef.distanceTo(nearest.latlng);
+    nearest.bearing = L.GeometryUtil.bearing(llRef,nearest.latlng);
+    if(nearest.bearing < 0){
+        nearest.bearing = nearest.bearing + 360;
+    }
+    nearest.att = nearest.layer.feature.properties;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+(7)-ANALIZANDO DATOS CON TURF.JS EN LEAFLET
+
+#Introducción a Turf.js - Buffers
+
+TURF.JS- Análisis espacial del lado del cliente
+
+-Turf no es un complemento de folleto
+-Biblioteca JavaScript para realizar análisis espaciales.
+-Toma entradas de geometría como GeoJSON
+    *longitud y área
+    *Centros y cascos convexos
+    *Referencia lineal
+    * Amortiguador, intersección, disolución, unión
+    *uniones espaciales
+    *Muestreo
+    *Crear, combinar, aplanar, etc.
+-Turf.js es un conjunto de herramientas
+
+-----------
+#Buffers - Basado en la característica Propiedad
+
+-Turf.js no tiene esta habilidad
+-Puedes implementar fácilmente en javaScript con lo que sabes
+-Pseudocódigo
+    *crear una capa de entidades vacía para contener las entidades almacenadas en zona de influencia
+    *Recorre las funciones (pista: utiliza la opción onEachFeature)
+        -Crear un búfer para cada característica en función de los atributos de esa característica
+        -Agregar el búfer a la capa de entidades
+    *Agregar la capa de entidades al mapa
+
+-----------
+#Análisis espacial: puntos en un polígono
+
+-Dentro
+    *Toma una colección de puntos
+    *Y una colección de características de polígonos.
+    *Devuelve un subconjunto de puntos que están en los polígonos.
+
+-Recolectar
+    *Toma una colección de características de polígonos.
+    *Toma una colección de puntos de características.
+    *Toma el nombre de una propiedad de los puntos a "cobrar"
+    *Toma el nombre de una propiedad de los polígonos para contener la "colección".
+
+-FeatureCollections
+    *Toma una serie de funciones y las devuelve como FeatureCollections
+
+
+Problema: resumir las propiedades de los nidos de águila dentro de 1/2 milla de una línea
+
+    -Function summarizePointByLine(line, bufferDistance, featureClassOfPoints, property)
+
+        *línea de buffer por bufferDistance
+        *convertir buffer a featureClassOfPoints
+        *lineBuffer = collect (lineBuffer, featureClassOfPoints, property, property + "Vals");
+        *Return lineBuffer
+    
